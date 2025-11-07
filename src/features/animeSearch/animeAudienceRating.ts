@@ -2,8 +2,8 @@ export const ANIME_AUDIENCE_RATING_LABEL_TO_PARAM_OBJECT = {
     "All": null,
     "G - All Ages": "g",
     "PG - Children": "pg",
-    "PG-13 - Teens 13 or older": "pg13",
-    "R - 17+ (violence & profanity)": "r17",
+    "PG-13 - Teens 13+": "pg13",
+    "R - 17+": "r17",
     "R+ - Mild Nudity": "r",
     "Rx - Explicit": "rx",
 } as const;

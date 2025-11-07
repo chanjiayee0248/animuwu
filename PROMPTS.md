@@ -1,6 +1,8 @@
 # AI/Copilot Usage Disclosure
 Hi! If you're reading this, chances are you're curious about *how* AI tools were used in the creation of this project. I'll try to keep sections organized based on overall sub-objectives, and use a journal-like style since I'd imagine you'd want to peer into my thought processes :D
 
+Extra context/background info: My previous projects have mostly been purely static apps with little to no data fetching, and involved using MobX instead of Redux for state management. This is my first time building an app with a larger focus on data fetching and API integration, and my first time using Redux as well. 
+
 Here goes!
 
 ## AI Tools Used:
@@ -12,6 +14,9 @@ Here goes!
 ### Prompt: *[Paste Entire Project Requirement]*
 - Reasoning: I wanted to get a high-level overview of the project requirements before diving in, and check out what the "average, standardized solution" would be in terms of layout and presentation — just to make sure I'm envisioning more or less the same thing.
 - Outcome: Claude generated a simple homepage with a logo and an anime search bar. Very barebones and search was broken (as expected, since i didn't provide any API details), but it gave me a baseline to work against and some code to look through. Mainly it just helped me feel less intimidated about taking on this coding challenge to begin with. (Never done one before, first times are scary!)
+### Prompt: Create a sample single anime page layout, given these fields available: *[Paste Response Sample from Jikan's getAnimeById]*
+- Reasoning: I wanted to get a feel for how to best present the various fields available in the anime details response.
+- Outcome: Claude generated a fairly clean base layout with sections for synopsis, stats, genres, studios, and trailer, which I could then further adjust in Figma.
 
 ## General Busywork
 ### Prompt: Convert this *[List of Enum Values]* into a TypeScript Type
@@ -19,7 +24,7 @@ Here goes!
 - Outcome: ChatGPT generated the TypeScript code for me, which I then copy-pasted into my codebase.
 - Other Examples of Busywork Offloaded to AI:
   - Creating labels for params and putting them into an object for easier mapping in the UI (eg mapping "TV Show" to "tv" for the API call)
-  - Find first matching object key based on value
+  - Creating TypeScript interfaces from response schema in the Jikan API docs
 
 ## Managing Typescript Types
 ### Prompt: *What name to give this TypeScript Type *[Paste Enums]*? 
@@ -29,5 +34,5 @@ e.g., the "type" param for "getAnimeSearch" [Enum: "tv" "movie" "ova" "special" 
 
 ## Going Down Rabbit Holes...
 Sometimes when Claude/ChatGPT offer up curious suggestions, I end up probing further into the topic out of curiosity. Sometimes it leads to dead ends, sometimes it leads to cool discoveries. Some neat things I learned/picked up working on this project:
-- *Interfaces vs Types*: I used to strongly prefer types over interfaces in TS (they felt more "strict" to me), but after ChatGPT suggested a solution using interfaces, I ended up browsing reddit and StackOverflow threads. The conclusion I got was "it depends on the use case" (fair lol, that and intellisense supports interfaces better in some IDEs for union types). I eventually circled back around with Claude to my initial query: I intended to define a union of string literals for animeMediaFormats, then use that to type out (?) an object to map to label values in the UI, but Claude went "Hey, if you already know all the values beforehand, why not create a const object, THEN derive the types?" Cue `animeMediaFormats.ts`
-
+- ***Interfaces vs Types***: I used to strongly prefer types over interfaces in TS (they felt more "strict" to me), but after ChatGPT suggested a solution using interfaces, I ended up browsing reddit and StackOverflow threads. The conclusion I got was "it depends on the use case" (fair lol, that and intellisense supports interfaces better in some IDEs for union types). I settled on interface for large objects, considering the extend functionality might be useful (eg respose from `getAnimeFullById` vs `getAnimeById`). I eventually circled back around with Claude to my initial query: I intended to define a union of string literals for animeMediaFormats, then use that to type out (?) an object to map to label values in the UI, but Claude went "Hey, if you already know all the values beforehand, why not create a const object, THEN derive the types?" Cue `animeMediaFormats.ts`
+- ***Naming Conventions***: I tried coming up with a descriptive name for jikan api calls. Started out with `fetchAllAnimeByQueryAndPage`, but I wondered if it was too verbose. ChatGPT suggested that since it's the "main" way of fetching data, a general name would be fine, and suggested `fetchAnimeList`, but I felt that would indicate it returned an array rather than a paginated response. Eventually settled on `jikanFetchAnimeSearch` since it does indicate a purpose `fetch` and it's form the `jikan` API, in case I ever need to add other APIs in the future.
