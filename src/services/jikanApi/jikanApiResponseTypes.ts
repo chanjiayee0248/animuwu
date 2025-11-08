@@ -1,21 +1,22 @@
 // =========================
 // Anime Images
 // =========================
-export interface JikanResponseAnimeImageSetInterface {
+
+export interface JikanAnimeImageSetInterface {
     image_url: string | null;
     small_image_url: string | null;
     large_image_url: string | null;
 }
 
-export interface JikanResponseAnimeImagesInterface {
-    jpg: JikanResponseAnimeImageSetInterface;
-    webp: JikanResponseAnimeImageSetInterface;
+export interface JikanAnimeImagesInterface {
+    jpg: JikanAnimeImageSetInterface;
+    webp: JikanAnimeImageSetInterface;
 }
 
 // =========================
 // Trailer
 // =========================
-export interface JikanResponseAnimeTrailerInterface {
+export interface JikanAnimeTrailerInterface {
     youtube_id: string | null;
     url: string | null;
     embed_url: string | null;
@@ -24,7 +25,7 @@ export interface JikanResponseAnimeTrailerInterface {
 // =========================
 // Titles
 // =========================
-export interface JikanResponseAnimeTitleInterface {
+export interface JikanAnimeTitleInterface {
     type: string;
     title: string;
 }
@@ -32,22 +33,22 @@ export interface JikanResponseAnimeTitleInterface {
 // =========================
 // Dates / Airing
 // =========================
-export interface JikanResponseAnimeDatePropInterface {
+export interface JikanAnimeDatePropInterface {
     day: number | null;
     month: number | null;
     year: number | null;
 }
 
-export interface JikanResponseAnimeDateRangeInterface {
-    from: JikanResponseAnimeDatePropInterface;
-    to: JikanResponseAnimeDatePropInterface;
-    string: string | null;
+export interface JikanAnimeDateRangeInterface {
+    from: JikanAnimeDatePropInterface;
+    to: JikanAnimeDatePropInterface;
+    // string: string | null; NO STRING! JIKAN DOCS ERROR!
 }
 
 // =========================
 // Broadcast
 // =========================
-export interface JikanResponseAnimeBroadcastInterface {
+export interface JikanAnimeBroadcastInterface {
     day: string | null;
     time: string | null;
     timezone: string | null;
@@ -57,7 +58,7 @@ export interface JikanResponseAnimeBroadcastInterface {
 // =========================
 // MAL URL Resource
 // =========================
-export interface JikanResponseAnimeMalUrlResourceInterface {
+export interface JikanAnimeMalUrlResourceInterface {
     mal_id: number;
     type: string;
     name: string;
@@ -67,28 +68,21 @@ export interface JikanResponseAnimeMalUrlResourceInterface {
 // =========================
 // Single Anime Object
 // =========================
-export interface JikanResponseAnimeSingleItemInterface {
+export interface JikanAnimeSingleItemInterface {
     mal_id: number;
     url: string;
-    images: JikanResponseAnimeImagesInterface;
-    trailer: JikanResponseAnimeTrailerInterface;
+    images: JikanAnimeImagesInterface;
+    trailer: JikanAnimeTrailerInterface;
     approved: boolean;
-    titles: JikanResponseAnimeTitleInterface[];
+    titles: JikanAnimeTitleInterface[];
     type: "TV" | "OVA" | "Movie" | "Special" | "ONA" | "Music" | null;
     source: string | null;
     episodes: number | null;
     status: "Finished Airing" | "Currently Airing" | "Not yet aired" | null;
     airing: boolean;
-    aired: JikanResponseAnimeDateRangeInterface;
+    aired: { from: string | null; to: string | null; prop: JikanAnimeDateRangeInterface; string: string | null };
     duration: string | null;
-    rating:
-        | "G - All Ages"
-        | "PG - Children"
-        | "PG-13 - Teens 13 or older"
-        | "R - 17+ (violence & profanity)"
-        | "R+ - Mild Nudity"
-        | "Rx - Hentai"
-        | null;
+    rating: "G - All Ages" | "PG - Children" | "PG-13 - Teens 13 or older" | "R - 17+ (violence & profanity)" | "R+ - Mild Nudity" | "Rx - Hentai" | null;
     score: number | null;
     scored_by: number | null;
     rank: number | null;
@@ -99,36 +93,40 @@ export interface JikanResponseAnimeSingleItemInterface {
     background: string | null;
     season: "summer" | "winter" | "spring" | "fall" | null;
     year: number | null;
-    broadcast: JikanResponseAnimeBroadcastInterface;
-    producers: JikanResponseAnimeMalUrlResourceInterface[];
-    licensors: JikanResponseAnimeMalUrlResourceInterface[];
-    studios: JikanResponseAnimeMalUrlResourceInterface[];
-    genres: JikanResponseAnimeMalUrlResourceInterface[];
-    explicit_genres: JikanResponseAnimeMalUrlResourceInterface[];
-    themes: JikanResponseAnimeMalUrlResourceInterface[];
-    demographics: JikanResponseAnimeMalUrlResourceInterface[];
+    broadcast: JikanAnimeBroadcastInterface;
+    producers: JikanAnimeMalUrlResourceInterface[];
+    licensors: JikanAnimeMalUrlResourceInterface[];
+    studios: JikanAnimeMalUrlResourceInterface[];
+    genres: JikanAnimeMalUrlResourceInterface[];
+    explicit_genres: JikanAnimeMalUrlResourceInterface[];
+    themes: JikanAnimeMalUrlResourceInterface[];
+    demographics: JikanAnimeMalUrlResourceInterface[];
 }
 
 // =========================
 // Pagination
 // =========================
-export interface JikanResponseAnimePaginationItemsInterface {
+export interface JikanAnimePaginationItemsInterface {
     count: number;
     total: number;
     per_page: number;
 }
 
-export interface JikanResponseAnimePaginationInterface {
+export interface JikanAnimePaginationInterface {
     last_visible_page: number;
     has_next_page: boolean;
     current_page: number;
-    items: JikanResponseAnimePaginationItemsInterface;
+    items: JikanAnimePaginationItemsInterface;
 }
 
 // =========================
 // Full API Response
 // =========================
-export interface JikanResponseAnimeFullInterface {
-    data: JikanResponseAnimeSingleItemInterface[];
-    pagination: JikanResponseAnimePaginationInterface;
+export interface JikanAnimeSearchResponseInterface {
+    data: JikanAnimeSingleItemInterface[];
+    pagination: JikanAnimePaginationInterface;
+}
+
+export interface JikanAnimeLookupResponseInterface {
+    data: JikanAnimeSingleItemInterface;
 }

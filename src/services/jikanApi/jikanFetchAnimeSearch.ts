@@ -1,10 +1,13 @@
-import {BASE_JIKAN_API_URL} from "@/services/jikanApiConfig.ts";
-import type {AnimeMediaFormatParamType} from "../../features/animeSearch/animeMediaFormats.ts";
-import type {AnimeAiringStatusParamType} from "../../features/animeSearch/animeAiringStatus.ts";
-import type {AnimeAudienceRatingParamType} from "../../features/animeSearch/animeAudienceRating.ts";
-import type {AnimeSortCategoryParamType} from "../../features/animeSearch/animeSortCategory.ts";
-import type {AnimeSortDirectionParamType} from "../../features/animeSearch/animeSortDirection.ts";
-import type {AlphabetCharType} from "../../features/_shared/alphabetCharType.ts";
+import {BASE_JIKAN_API_URL} from "@/services/jikanApi/jikanApiConfig";
+import type {AnimeMediaFormatParamType} from "@/features/animeSearch/animeMediaFormats";
+import type {AnimeAiringStatusParamType} from "@/features/animeSearch/animeAiringStatus";
+import type {AnimeAudienceRatingParamType} from "@/features/animeSearch/animeAudienceRating";
+import type {AnimeSortCategoryParamType} from "@/features/animeSearch/animeSortCategory";
+import type {AnimeSortDirectionParamType} from "@/features/animeSearch/animeSortDirection";
+import type {AlphabetCharType} from "@/features/_shared/alphabetCharType";
+import type {JikanAnimeSearchResponseInterface} from "@/services/jikanApi/jikanApiResponseTypes";
+
+import {fetchJson} from "@/services/_shared/fetchJson";
 
 interface JikanApiSearchParamsInterface {
     q?: string;
@@ -27,8 +30,9 @@ interface JikanApiSearchParamsInterface {
     end_date?: string; // YYYY-MM-DD
 }
 
-function buildJikanAnimeSearchUrl(params: JikanApiSearchParamsInterface): string {
+export function buildJikanAnimeSearchUrl(params: JikanApiSearchParamsInterface): string {
     const url = new URL(`${BASE_JIKAN_API_URL}/anime`);
+
     Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
             url.searchParams.append(key, String(value));
@@ -37,7 +41,10 @@ function buildJikanAnimeSearchUrl(params: JikanApiSearchParamsInterface): string
     return url.toString();
 }
 
-export function jikanFetchAnimeSearch(params: JikanApiSearchParamsInterface): Promise<Response> {
+export async function jikanFetchAnimeSearch(params: JikanApiSearchParamsInterface): Promise<JikanAnimeSearchResponseInterface> {
+    if (params.limit !== undefined && params.limit < 1) {
+        throw new Error("Limit must be at least 1");
+    }
     const url = buildJikanAnimeSearchUrl(params);
+    return fetchJson<JikanAnimeSearchResponseInterface>(url);
 }
-
