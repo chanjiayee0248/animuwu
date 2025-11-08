@@ -1,4 +1,4 @@
-export const ANIME_AUDIENCE_RATING_LABEL_TO_PARAM_OBJECT = {
+export const ANIME_AUDIENCE_RATING_DISPLAY_VALUE_TO_PARAM_OBJECT = {
     "All": null,
     "G - All Ages": "g",
     "PG - Children": "pg",
@@ -8,16 +8,16 @@ export const ANIME_AUDIENCE_RATING_LABEL_TO_PARAM_OBJECT = {
     "Rx - Explicit": "rx",
 } as const;
 
-export type AnimeAudienceRatingLabelType = keyof typeof ANIME_AUDIENCE_RATING_LABEL_TO_PARAM_OBJECT;
-export type AnimeAudienceRatingParamType = typeof ANIME_AUDIENCE_RATING_LABEL_TO_PARAM_OBJECT[AnimeAudienceRatingLabelType];
+export type AnimeAudienceRatingLabelType = keyof typeof ANIME_AUDIENCE_RATING_DISPLAY_VALUE_TO_PARAM_OBJECT;
+export type AnimeAudienceRatingParamType = typeof ANIME_AUDIENCE_RATING_DISPLAY_VALUE_TO_PARAM_OBJECT[AnimeAudienceRatingLabelType];
 export type DefinedAnimeAudienceRatingParamType = Exclude<AnimeAudienceRatingParamType, null>;
 
 export function getAnimeAudienceRatingParamFromLabel(label: AnimeAudienceRatingLabelType): AnimeAudienceRatingParamType {
-    return ANIME_AUDIENCE_RATING_LABEL_TO_PARAM_OBJECT[label];
+    return ANIME_AUDIENCE_RATING_DISPLAY_VALUE_TO_PARAM_OBJECT[label];
 }
 
 export function getAnimeAudienceRatingLabelFromParam(param: DefinedAnimeAudienceRatingParamType): AnimeAudienceRatingLabelType {
-    for (const [label, value] of Object.entries(ANIME_AUDIENCE_RATING_LABEL_TO_PARAM_OBJECT)) {
+    for (const [label, value] of Object.entries(ANIME_AUDIENCE_RATING_DISPLAY_VALUE_TO_PARAM_OBJECT)) {
         if (value === param) return label as AnimeAudienceRatingLabelType;
     }
     throw new Error(`Invalid anime audience rating param: ${param}`);
