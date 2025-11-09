@@ -9,6 +9,7 @@ Here goes!
 - *GitHub Copilot*: Used primarily for code suggestions and boilerplate generation.
 - *Claude*: Used primarily for brainstorming and debugging.
 - *ChatGPT*: Used primarily when Claude rate limit is hit (lol), when Claude answers appear suboptimal (feel "off") and I want a "second opinion", or when a task is too "simple" to justify using up my Claude quota (e.g. boilerplate, simple refactors).
+- *Google Browser AI*: Does this count? Lol. Sometimes if I'm suspicious a LLM is hallucinating or want to tackle something that's more trouble to prompt than just to Google, I'll do a quick google search on docs or StackOverflow to verify, and occasionally the Browser AI provides pretty good summaries.
 
 ## Project Conceptualization
 ### Prompt: *[Paste Entire Project Requirement]*
@@ -48,6 +49,11 @@ e.g., the "type" param for "getAnimeSearch" [Enum: "tv" "movie" "ova" "special" 
 - Reasoning: I'm pretty much completely new to Redux! That being said, I am quite familiar with state management using MobX, and going through a quick Redux tutorial (i.e. Redux Docs and telling ChatGPT to explain concepts to me) made me realize that many concepts are now more similar with the new Redux Toolkit approach (store vs rootstores, slices vs childstores etc). I found it easier to describe what I wanted in MobX terms, and have AI help me translate that into Redux Toolkit code.
 - Outcome: Claude generated fairly accurate Redux Toolkit code based on my MobX-style descriptions. I then reviewed and adjusted the code as necessary to fit my project structure and naming conventions. At some point, I found this to be a really cool learning project for learning Redux (and so many other new things!), so I ended up adding note-like comments just to reinforce learning for myself.
 
+## "Big" Components
+### Prompt: [Describe Component Requirements, Let Github Copilot Handle the First Draft]
+- Example Prompt: Okay, biiig project for you. Need you to, based on store.ts loading states and param, call jikanFetchAnimeSearch, then render a grid. Should render when on first load, and when a store param updates, but debounce to 250ms. If it's loading, populate with 25 skeletons (dont worry about individual card styling I'll do those later). If an error returns, just display the error message. Otherwise, render the cards of the specified page
+- Reasoning: For larger components, it can feel a little mentally overwhelming to think through all the logic and structure at once. I find it helpful to let Copliot generate a first draft based on my description. It feels easier to review and adjust code than to write it from scratch sometimes.
+- Outcome: Copilot generated a solid first draft for me, which I then reviewed and adjusted as necessary to fit my project structure and naming conventions.
 ## Going Down Rabbit Holes...
 Sometimes when Claude/ChatGPT offer up curious suggestions, I end up probing further into the topic out of curiosity. Sometimes it leads to dead ends, sometimes it leads to cool discoveries. Some neat things I learned/picked up working on this project:
 - ***Interfaces vs Types***: I used to strongly prefer types over interfaces in TS (they felt more "strict" to me), but after ChatGPT suggested a solution using interfaces, I ended up browsing reddit and StackOverflow threads. The conclusion I got was "it depends on the use case" (fair lol, that and intellisense supports interfaces better in some IDEs for union types). I settled on interface for large objects, considering the extend functionality might be useful (eg respose from `getAnimeFullById` vs `getAnimeById`). I eventually circled back around with Claude to my initial query: I intended to define a union of string literals for animeMediaFormats, then use that to type out (?) an object to map to label values in the UI, but Claude went "Hey, if you already know all the values beforehand, why not create a const object, THEN derive the types?" Cue `animeMediaFormats.ts`

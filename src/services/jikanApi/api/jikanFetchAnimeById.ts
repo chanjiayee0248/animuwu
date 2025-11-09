@@ -1,6 +1,6 @@
-import {fetchJson} from "@/services/_shared/fetchJson";
-import {BASE_JIKAN_API_URL} from "@/services/jikanApi/jikanApiConfig";
-import type {JikanAnimeLookupResponseInterface} from "@/services/jikanApi/jikanApiResponseTypes";
+import {fetchJson} from "@/services/_shared/fetchJson.ts";
+import {BASE_JIKAN_API_URL} from "@/services/jikanApi/api/jikanApiConfig.ts";
+import type {JikanAnimeLookupResponseInterface} from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
 
 export async function jikanFetchAnimeById(animeId: number): Promise<JikanAnimeLookupResponseInterface> {
 

@@ -2,10 +2,13 @@ import {AnimeCard} from "@/components/AnimeHomePage/AnimeCard.tsx";
 import AnimeCardSkeleton from "@/components/AnimeHomePage/AnimeCardSkeleton.tsx";
 import {useAppDispatch, useAppSelector} from "@/store/hooks";
 import {animeSearchActions} from "@/store/animeSearchSlice";
-import {jikanFetchAnimeSearch} from "@/services/jikanApi/jikanFetchAnimeSearch";
+import {jikanFetchAnimeSearch} from "@/services/jikanApi/api/jikanFetchAnimeSearch.ts";
 import {useEffect, useRef, useState} from "react";
-import type {JikanAnimeSearchResponseInterface} from "@/services/jikanApi/jikanApiResponseTypes";
+import type {
+    JikanAnimeSearchResponseInterface,
+} from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
 import type {AnimeMediaFormatParamType} from "@/features/animeSearch/animeMediaFormats";
+import {getPreferredJikanAnimeTitle} from "@/services/jikanApi/utils/getPreferredJikanAnimeTitle.ts";
 
 /**
  * Convert API response type format (e.g., "TV", "Movie") to param format (e.g., "tv", "movie")
@@ -24,6 +27,12 @@ function convertApiTypeToParam(apiType: "TV" | "OVA" | "Movie" | "Special" | "ON
 
     return typeMap[apiType] || null;
 }
+
+/**
+ * Pick the preferred title from the Jikan titles array.
+ * Preference order: English -> Default -> first entry -> fallback string
+ */
+
 
 function AnimeCardGrid() {
     const dispatch = useAppDispatch();
@@ -94,50 +103,42 @@ function AnimeCardGrid() {
         };
     }, [searchQuery, airingStatus, audienceRating, mediaFormat, sortCategory, sortDirection, currentPage, dispatch]);
 
-    // Render loading skeletons
-    if (animeSearchIsLoading) {
-        return (
-            <div className="anime-card-grid">
-                {Array.from({length: 25}).map((_, index) => (
-                    <AnimeCardSkeleton key={index} />
-                ))}
-            </div>
-        );
-    }
-
-    // Render error message
-    if (animeSearchError) {
-        return (
-            <div className="anime-card-grid-error">
-                {animeSearchError}
-            </div>
-        );
-    }
-
-    // Render anime cards
-    if (animeData && animeData.data.length > 0) {
-        return (
-            <div className="anime-card-grid">
-                {animeData.data.map((anime) => (
+    // Always render a single grid wrapper; conditionally show skeletons, error, cards, or empty state inside it
+    return (
+        <div className="w-full grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-x-4 gap-y-6 justify-items-center">
+            {animeSearchIsLoading ? (
+                // Loading skeletons
+                Array.from({length: 25}).map((_, index) => (
+                    <AnimeCardSkeleton key={`s-${index}`} />
+                ))
+            ) : animeSearchError ? (
+                // Error message spans full width
+                <div className="col-span-full anime-card-grid-error text-center">
+                    {animeSearchError}
+                </div>
+            ) : animeData && animeData.data.length > 0 ? (
+                // Data cards
+                animeData.data.map((anime) => (
                     <AnimeCard
                         key={anime.mal_id}
-                        title={anime.titles[0]?.title || 'Unknown Title'}
+                        title={getPreferredJikanAnimeTitle(anime.titles)}
                         imageUrl={anime.images.jpg.large_image_url || anime.images.jpg.image_url}
                         score={anime.score}
                         mediaFormatParam={convertApiTypeToParam(anime.type)}
-                        airDate={anime.aired.from}
+                        airDateString={anime.aired.from}
+                        episodeCount={anime.episodes}
                     />
-                ))}
-            </div>
-        );
-    }
-
-    // Render empty state
-    return (
-        <div className="anime-card-grid-empty">
-            No anime found. Try adjusting your search filters.
+                ))
+            ) : (
+                // Empty state spans full width
+                <div className="col-span-full anime-card-grid-empty text-center">
+                    No anime found. Try adjusting your search filters.
+                </div>
+            )}
         </div>
     );
+
 }
 
 export default AnimeCardGrid;
+

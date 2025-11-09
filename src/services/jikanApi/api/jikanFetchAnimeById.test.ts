@@ -1,9 +1,9 @@
 // src/services/jikanApi/jikanFetchAnimeById.test.ts
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { MockedFunction } from "vitest";
-import { jikanFetchAnimeById } from "./jikanFetchAnimeById";
-import { fetchJson } from "@/services/_shared/fetchJson";
-import type { JikanAnimeLookupResponseInterface } from "@/services/jikanApi/jikanApiResponseTypes";
+import { jikanFetchAnimeById } from "./jikanFetchAnimeById.ts";
+import { fetchJson } from "@/services/_shared/fetchJson.ts";
+import type { JikanAnimeLookupResponseInterface } from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
 
 // --- Mock fetchJson ---
 vi.mock("@/services/_shared/fetchJson");

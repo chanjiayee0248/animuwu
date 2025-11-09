@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from "vitest";
-import { jikanFetchAnimeById } from "./jikanFetchAnimeById";
+import { jikanFetchAnimeById } from "./jikanFetchAnimeById.ts";
 import type {
     JikanAnimeLookupResponseInterface,
     JikanAnimeSingleItemInterface,
@@ -8,8 +8,8 @@ import type {
     JikanAnimeTitleInterface,
     JikanAnimeBroadcastInterface,
     JikanAnimeMalUrlResourceInterface,
-} from "@/services/jikanApi/jikanApiResponseTypes";
-import {JIKAN_INTEGRATION_TEST_COOLDOWN_IN_MS} from "@/services/jikanApi/jikanApiConfig";
+} from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
+import {JIKAN_INTEGRATION_TEST_COOLDOWN_IN_MS} from "@/services/jikanApi/api/jikanApiConfig.ts";
 
 // ======================================
 // Helper Functions for Assertions

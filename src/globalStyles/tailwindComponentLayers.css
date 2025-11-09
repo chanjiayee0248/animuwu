@@ -2,13 +2,27 @@
 
 @layer components {
     .anime-card {
-        background-color: var(--color-white);
+        position:relative;
+        background-color: var(--color-primary-muted-dark);
         border-radius: var(--radius-lg);
-        padding: --spacing(6);
         box-shadow: var(--shadow-xl);
+        max-width: 200px;
+        overflow: hidden;
     }
+
 
     .anime-card-title {
         @apply text-2xl font-bold mb-4;
+    }
+
+    .anime-card-rating-container {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        box-shadow: 0 0 2px rgba(0, 0, 0);
+        min-width: 3rem;
+        min-height: 1.25rem;
+        border-radius: var(--radius-2xl);
+        z-index: 1;
     }
 }

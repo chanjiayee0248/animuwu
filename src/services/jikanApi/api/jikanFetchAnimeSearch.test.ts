@@ -1,8 +1,8 @@
 import {describe, it, expect, vi, beforeEach, type MockedFunction} from "vitest";
-import {buildJikanAnimeSearchUrl, jikanFetchAnimeSearch} from "@/services/jikanApi/jikanFetchAnimeSearch";
-import type {JikanAnimeSearchResponseInterface} from "@/services/jikanApi/jikanApiResponseTypes";
-import {fetchJson} from "@/services/_shared/fetchJson";
-import {BASE_JIKAN_API_URL} from "@/services/jikanApi/jikanApiConfig";
+import {buildJikanAnimeSearchUrl, jikanFetchAnimeSearch} from "@/services/jikanApi/api/jikanFetchAnimeSearch.ts";
+import type {JikanAnimeSearchResponseInterface} from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
+import {fetchJson} from "@/services/_shared/fetchJson.ts";
+import {BASE_JIKAN_API_URL} from "@/services/jikanApi/api/jikanApiConfig.ts";
 
 describe("buildJikanAnimeSearchUrl", () => {
     it("builds URL with all params correctly", () => {

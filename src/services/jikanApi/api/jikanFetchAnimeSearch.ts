@@ -1,13 +1,13 @@
-import {BASE_JIKAN_API_URL} from "@/services/jikanApi/jikanApiConfig";
-import type {AnimeMediaFormatParamType} from "@/features/animeSearch/animeMediaFormats";
-import type {AnimeAiringStatusParamType} from "@/features/animeSearch/animeAiringStatus";
-import type {AnimeAudienceRatingParamType} from "@/features/animeSearch/animeAudienceRating";
-import type {AnimeSortCategoryParamType} from "@/features/animeSearch/animeSortCategory";
-import type {AnimeSortDirectionParamType} from "@/features/animeSearch/animeSortDirection";
-import type {AlphabetCharType} from "@/features/_shared/alphabetCharType";
-import type {JikanAnimeSearchResponseInterface} from "@/services/jikanApi/jikanApiResponseTypes";
+import {BASE_JIKAN_API_URL} from "@/services/jikanApi/api/jikanApiConfig.ts";
+import type {AnimeMediaFormatParamType} from "@/features/animeSearch/animeMediaFormats.ts";
+import type {AnimeAiringStatusParamType} from "@/features/animeSearch/animeAiringStatus.ts";
+import type {AnimeAudienceRatingParamType} from "@/features/animeSearch/animeAudienceRating.ts";
+import type {AnimeSortCategoryParamType} from "@/features/animeSearch/animeSortCategory.ts";
+import type {AnimeSortDirectionParamType} from "@/features/animeSearch/animeSortDirection.ts";
+import type {AlphabetCharType} from "@/features/_shared/alphabetCharType.ts";
+import type {JikanAnimeSearchResponseInterface} from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
 
-import {fetchJson} from "@/services/_shared/fetchJson";
+import {fetchJson} from "@/services/_shared/fetchJson.ts";
 
 interface JikanApiSearchParamsInterface {
     q?: string;

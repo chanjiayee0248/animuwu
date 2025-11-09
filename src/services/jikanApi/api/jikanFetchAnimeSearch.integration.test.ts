@@ -1,12 +1,12 @@
 
 import { describe, it, expect, afterEach } from "vitest";
-import { jikanFetchAnimeSearch } from "./jikanFetchAnimeSearch";
-import {assertAnimeObject} from "@/services/jikanApi/jikanFetchAnimeById.integration.test";
+import { jikanFetchAnimeSearch } from "./jikanFetchAnimeSearch.ts";
+import {assertAnimeObject} from "@/services/jikanApi/api/jikanFetchAnimeById.integration.test.ts";
 import type {
     JikanAnimeSearchResponseInterface,
     JikanAnimePaginationInterface,
-} from "@/services/jikanApi/jikanApiResponseTypes";
-import {JIKAN_INTEGRATION_TEST_COOLDOWN_IN_MS} from "@/services/jikanApi/jikanApiConfig";
+} from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
+import {JIKAN_INTEGRATION_TEST_COOLDOWN_IN_MS} from "@/services/jikanApi/api/jikanApiConfig.ts";
 
 function assertPagination(pagination: JikanAnimePaginationInterface) {
     expect(pagination).toBeDefined();

@@ -5,7 +5,7 @@ import AnimeHomePage from "@/components/AnimeHomePage/AnimeHomePage";
 function App() {
 
     return (
-        <div className="bg-prim">
+        <div className={`flex justify-center w-full min-h-dvh`}>
             <AnimeHomePage/>
         </div>
     )
