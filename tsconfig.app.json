@@ -24,12 +24,7 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-
-    /* Exclude JavaScript files from compilation */
-    "allowJs": false,
-    "checkJs": false
+    "noUncheckedSideEffectImports": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["**/*.js", "**/*.jsx"]
+  "include": ["src"]
 }

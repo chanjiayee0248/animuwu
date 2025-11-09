@@ -1,5 +1,6 @@
 import AnimeSearchFilterDropdowns from "@/components/AnimeHomePage/AnimeSearchFilterDropdowns";
 import AnimeSearchBar from "@/components/AnimeHomePage/AnimeSearchBar";
+import AnimeCardGrid from "@/components/AnimeHomePage/AnimeCardGrid.tsx";
 
 
 function AnimeHomePage() {
@@ -16,6 +17,7 @@ function AnimeHomePage() {
             <section className={`flex flex-col gap-6 items-center w-full`}>
                 <AnimeSearchBar/>
                 <AnimeSearchFilterDropdowns/>
+                <AnimeCardGrid/>
             </section>
         </div>
     );

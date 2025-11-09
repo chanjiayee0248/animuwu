@@ -14,12 +14,16 @@ interface AnimeCardProps {
 
 export function AnimeCard({title, imageUrl, score, mediaFormatParam, airDate}: AnimeCardProps) {
 
-    let mediaFormatDisplayValue = mediaFormatParam === null
-        ? "N/A"
-        : useParamToDisplayValue(mediaFormatParam, ANIME_MEDIA_FORMAT_DISPLAY_VALUE_TO_PARAM_OBJECT)
+    const mediaFormatLabel = useParamToDisplayValue(
+        mediaFormatParam,
+        ANIME_MEDIA_FORMAT_DISPLAY_VALUE_TO_PARAM_OBJECT
+    );
+
+    // Replace generic "All" with N/A
+    const mediaFormatDisplayValue = mediaFormatParam === null ? "N/A" : mediaFormatLabel;
 
     return (
-        <div>
+        <div className={`anime-card`}>
             {title}
             {imageUrl}
             {score}
@@ -28,3 +32,5 @@ export function AnimeCard({title, imageUrl, score, mediaFormatParam, airDate}: A
         </div>
     )
 }
+
+export default AnimeCard;
