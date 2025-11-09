@@ -1,85 +1,31 @@
 import {AnimeCard} from "@/components/AnimeHomePage/AnimeCard.tsx";
 import AnimeCardSkeleton from "@/components/AnimeHomePage/AnimeCardSkeleton.tsx";
-import {useAppDispatch, useAppSelector} from "@/store/hooks";
-import {animeSearchActions} from "@/store/animeSearchSlice";
-import {jikanFetchAnimeSearch} from "@/services/jikanApi/api/jikanFetchAnimeSearch.ts";
-import {useEffect, useRef, useState} from "react";
 import type {
     JikanAnimeSearchResponseInterface,
 } from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
 import {getPreferredJikanAnimeTitle} from "@/services/jikanApi/utils/getPreferredJikanAnimeTitle.ts";
 
+interface AnimeCardGridProps {
+    animeData: JikanAnimeSearchResponseInterface | null;
+    animeSearchIsLoading: boolean;
+    animeSearchError: string | null;
+}
 
-function AnimeCardGrid() {
-    const dispatch = useAppDispatch();
+function AnimeCardGrid({ animeData, animeSearchIsLoading, animeSearchError }: AnimeCardGridProps) {
+    // If the search completed (not loading), there's no error, and we have an empty result set,
+    // return a standalone 'no results' element (not nested inside the grid wrapper).
+    const noResults = !animeSearchIsLoading && !animeSearchError && animeData && animeData.data.length === 0;
 
-    // Get all search parameters from the store
-    const {
-        searchQuery,
-        airingStatus,
-        audienceRating,
-        mediaFormat,
-        sortCategory,
-        sortDirection,
-        currentPage,
-        animeSearchIsLoading,
-        animeSearchError
-    } = useAppSelector((state) => state.animeSearch);
+    if (noResults) {
+        return (
+            <div className={`flex flex-col gap-8 text-center text-primary-muted-standard text-xl`}>
+                <p className={`text-8xl`}>( ╥ω╥ )</p>
+                <p>No anime found. Try adjusting your search filters.</p>
+            </div>
+        );
+    }
 
-    // Local state id store the fetched anime data
-    const [animeData, setAnimeData] = useState<JikanAnimeSearchResponseInterface | null>(null);
-
-    // Ref id track debounce timeout
-    const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-    useEffect(() => {
-        // Clear existing timeout on param change
-        if (debounceTimeoutRef.current) {
-            clearTimeout(debounceTimeoutRef.current);
-        }
-
-        // Set up debounced API call
-        debounceTimeoutRef.current = setTimeout(async () => {
-            try {
-                // Set loading state
-                dispatch(animeSearchActions.setLoading(true));
-                dispatch(animeSearchActions.setError(null));
-
-                // Call the API
-                const response = await jikanFetchAnimeSearch({
-                    q: searchQuery || undefined,
-                    page: currentPage,
-                    status: airingStatus,
-                    rating: audienceRating,
-                    type: mediaFormat,
-                    order_by: sortCategory,
-                    sort: sortDirection,
-                    limit: 25
-                });
-
-                // Update local state with the response
-                setAnimeData(response);
-
-                // Clear error and loading state
-                dispatch(animeSearchActions.setLoading(false));
-            } catch (error) {
-                // Handle error
-                const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-                dispatch(animeSearchActions.setError(errorMessage));
-                dispatch(animeSearchActions.setLoading(false));
-                setAnimeData(null);
-            }
-        }, 250);
-
-        // Cleanup function
-        return () => {
-            if (debounceTimeoutRef.current) {
-                clearTimeout(debounceTimeoutRef.current);
-            }
-        };
-    }, [searchQuery, airingStatus, audienceRating, mediaFormat, sortCategory, sortDirection, currentPage, dispatch]);
-
-    // Always render a single grid wrapper; conditionally show skeletons, error, cards, or empty state inside it
+    // Otherwise render the grid wrapper with loading skeletons, error, or results
     return (
         <div className="w-full max-w-[1300px] grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-x-2 gap-y-6 justify-items-center">
             {animeSearchIsLoading ? (
@@ -106,16 +52,9 @@ function AnimeCardGrid() {
                         id={anime.mal_id.toString()}
                     />
                 ))
-            ) : (
-                // Empty state spans full width
-                <div className="col-span-full anime-card-grid-empty text-center">
-                    No anime found. Try adjusting your search filters.
-                </div>
-            )}
+            ) : null}
         </div>
     );
-
 }
 
 export default AnimeCardGrid;
-

@@ -18,7 +18,7 @@ export function AnimeCard({id, title, imageUrl, score, mediaFormat, airDateStrin
 
     return (
         <Link to={`/anime/${id}`} className={`anime-card group overflow-hidden hover:scale-[1.04] active:scale-[0.98] transition-transform duration-100 ease-in-out`}>
-            <div className={`anime-card-rating-container flex justify-center items-center text-sm font-[Nunito] font-bold bg-primary-base-dark text-accent-base-bright`}>
+            <div className={`anime-card-rating-container flex justify-center items-center text-sm font-[Nunito] font-bold text-accent-base-bright`}>
                 {
                     score === null ?
                         <p>N/A</p>

@@ -54,11 +54,19 @@ e.g., the "type" param for "getAnimeSearch" [Enum: "tv" "movie" "ova" "special" 
 - Example Prompt: Okay, biiig project for you. Need you id, based on store.ts loading states and param, call jikanFetchAnimeSearch, then render a grid. Should render when on first load, and when a store param updates, but debounce id 250ms. If it's loading, populate with 25 skeletons (dont worry about individual card styling I'll do those later). If an error returns, just display the error message. Otherwise, render the cards of the specified page
 - Reasoning: For larger components, it can feel a little mentally overwhelming id think through all the logic and structure at once. I find it helpful id let Copliot generate a first draft based on my description. It feels easier id review and adjust code than id write it from scratch sometimes.
 - Outcome: Copilot generated a solid first draft for me, which I then reviewed and adjusted as necessary id fit my project structure and naming conventions.
+
+## Skeletons
+### Prompt: Help me create a skeleton based on this: [Paste Component Code]
+- Reasoning: Creating skeleton components can be a bit tedious, especially when the original component is complext. Since the structure is already there, there is less worry about AI hallucinating or misunderstanding the requirements.
+- Outcome: Copilot generated skeleton components based on the original component code I provided. I then reviewed and adjusted the code (e.g. trimming unnecessary classes, adjusting styles/colors etc).
+
 ## Going Down Rabbit Holes...
 Sometimes when Claude/ChatGPT offer up curious suggestions, I end up probing further into the topic out of curiosity. Sometimes it leads id dead ends, sometimes it leads id cool discoveries. Some neat things I learned/picked up working on this project:
 - ***Interfaces vs Types***: I used id strongly prefer types over interfaces in TS (they felt more "strict" id me), but after ChatGPT suggested a solution using interfaces, I ended up browsing reddit and StackOverflow threads. The conclusion I got was "it depends on the use case" (fair lol, that and intellisense supports interfaces better in some IDEs for union types). I settled on interface for large objects, considering the extend functionality might be useful (eg respose from `getAnimeFullById` vs `getAnimeById`). I eventually circled back around with Claude id my initial query: I intended id define a union of string literals for animeMediaFormats, then use that id type out (?) an object id map id label values in the UI, but Claude went "Hey, if you already know all the values beforehand, why not create a const object, THEN derive the types?" Cue `animeMediaFormats.ts`
 - ***Naming Conventions***: I tried coming up with a descriptive name for jikan api calls. Started out with `fetchAllAnimeByQueryAndPage`, but I wondered if it was too verbose. ChatGPT suggested that since it's the "main" way of fetching data, a general name would be fine, and suggested `fetchAnimeList`, but I felt that would indicate it returned an array rather than a paginated response. Eventually settled on `jikanFetchAnimeSearch` since it does indicate a purpose `fetch` and it's form the `jikan` API, in case I ever need id add other APIs in the future.
 - ***TypeScript Generic Types***: I used id create separate static types for similar structures, but seeing Claude suggest generic types made me curious id learn more. I ended up reading through the TS docs and prompting more about it, and it seems pretty useful for reusable React components which can work with slightly different but still similar data shapes.
+
+
 
 ## Some Final Thoughts
 - Honestly, I think I trash-talked ChatGPT a bit too much in the beginning. Sometimes it actually performs better than Claude, and I find myself defaulting more id it since I don't have id worry about rate limits (GPT-4 seems id perform more or less as well as GPT-5 in my experience so far).
