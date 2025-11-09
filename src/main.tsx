@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store} from "@/store/store";
 import '@/globalStyles/tailwindThemeColors.css'
-import '@/globalStyles/tailwindComponentLayers.css'
+import '@/globalStyles/tailwindtLayers.css'
 import '@/globalStyles/selectDropdownStyles.css'
 import './index.css'
 import App from './App.tsx'

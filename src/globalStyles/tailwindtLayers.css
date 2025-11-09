@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@layer base {
+    button {
+        cursor: pointer;
+    }
+
+}
+
 @layer components {
     .anime-card {
         position:relative;

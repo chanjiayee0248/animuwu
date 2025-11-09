@@ -1,3 +1,4 @@
+
 interface PaginationProps {
     currentPage: number;
     totalPages: number;
@@ -5,8 +6,6 @@ interface PaginationProps {
 }
 
 function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
-    // If there's nowhere to paginate, don't render anything
-    if (totalPages <= 1) return null;
 
     // Helper: build a compact list of page items (numbers or 'ellipsis')
     const getPageItems = (): (number | 'ellipsis')[] => {
@@ -51,6 +50,8 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
 
     const pageItems = getPageItems();
 
+    const prevNextStyle = `px-3 py-1 rounded hover:shadow text-primary-muted-bright bg-primary-muted-dark-translucent`;
+
     return (
         // Container
         <nav aria-label="Pagination" className="flex items-center space-x-2">
@@ -60,13 +61,13 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
                 onClick={() => clampAndChange(currentPage - 1)}
                 disabled={currentPage === 1}
                 aria-label="Go to previous page"
-                className={`px-3 py-1 rounded border ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:shadow'}`}
+                className={`${prevNextStyle} ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-primary-muted-medium-translucent'}`}
             >
-                Prev
+                {"< Prev"}
             </button>
 
             {/* Page number buttons / ellipses */}
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-1 text-primary-base-standard ">
                 {pageItems.map((item, idx) =>
                     item === 'ellipsis' ? (
                         <span key={`ell-${idx}`} className="px-2">…</span>
@@ -77,7 +78,8 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
                             onClick={() => clampAndChange(item)}
                             aria-current={item === currentPage ? 'page' : undefined}
                             aria-label={item === currentPage ? `Current page, ${item}` : `Go to page ${item}`}
-                            className={`px-3 py-1 rounded border ${item === currentPage ? 'bg-sky-600 text-white' : 'hover:shadow'}`}
+                            className={`px-3 py-1 rounded  
+                            ${item === currentPage ? 'bg-secondary-base-medium text-white font-medium' : 'bg-primary-muted-dark'}`}
                         >
                             {item}
                         </button>
@@ -90,9 +92,9 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
                 onClick={() => clampAndChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
                 aria-label="Go to next page"
-                className={`px-3 py-1 rounded border ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:shadow'}`}
+                className={`${prevNextStyle} ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-primary-muted-medium'}`}
             >
-                Next
+                {"Next >"}
             </button>
 
         </nav>

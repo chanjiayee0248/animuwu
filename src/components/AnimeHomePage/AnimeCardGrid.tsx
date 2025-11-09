@@ -19,7 +19,7 @@ function AnimeCardGrid({ animeData, animeSearchIsLoading, animeSearchError }: An
     if (noResults) {
         return (
             <div className={`flex flex-col gap-8 text-center text-primary-muted-standard text-xl`}>
-                <p className={`text-8xl`}>( ╥ω╥ )</p>
+                <p aria-hidden={true} className={`text-8xl`}>( ╥ω╥ )</p>
                 <p>No anime found. Try adjusting your search filters.</p>
             </div>
         );
@@ -35,8 +35,10 @@ function AnimeCardGrid({ animeData, animeSearchIsLoading, animeSearchError }: An
                 ))
             ) : animeSearchError ? (
                 // Error message spans full width
-                <div className="col-span-full anime-card-grid-error text-center">
-                    {animeSearchError}
+                <div className={`flex flex-col gap-4 text-center text-primary-muted-standard text-xl`}>
+                    <p className={`text-8xl`}>(ʘᗩʘ’)</p>
+                    <p className={`text-6xl italic font-bold`}>Error!</p>
+                    <p>{animeSearchError}</p>
                 </div>
             ) : animeData && animeData.data.length > 0 ? (
                 // Data cards

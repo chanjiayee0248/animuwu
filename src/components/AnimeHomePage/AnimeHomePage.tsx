@@ -33,6 +33,43 @@ function AnimeHomePage() {
     // Ref id track debounce timeout
     const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+    // Preserve parameters to detect changes
+    const prevParamsRef = useRef({
+        searchQuery,
+        airingStatus,
+        audienceRating,
+        mediaFormat,
+        sortCategory,
+        sortDirection
+    });
+
+    // Reset to first page ONLY when any search parameter changes (NOT ON MOUNT)
+    useEffect(() => {
+        const prevParams = prevParamsRef.current;
+        const paramsChanged =
+            prevParams.searchQuery !== searchQuery ||
+            prevParams.airingStatus !== airingStatus ||
+            prevParams.audienceRating !== audienceRating ||
+            prevParams.mediaFormat !== mediaFormat ||
+            prevParams.sortCategory !== sortCategory ||
+            prevParams.sortDirection !== sortDirection;
+
+        // Only reset to first page if parameters actually changed
+        if (paramsChanged) {
+            dispatch(animeSearchActions.setCurrentPage(1));
+        }
+
+        // Update ref with current values
+        prevParamsRef.current = {
+            searchQuery,
+            airingStatus,
+            audienceRating,
+            mediaFormat,
+            sortCategory,
+            sortDirection
+        };
+    }, [searchQuery, airingStatus, audienceRating, mediaFormat, sortCategory, sortDirection, dispatch]);
+
     useEffect(() => {
         // Clear existing timeout on param change
         if (debounceTimeoutRef.current) {
@@ -97,11 +134,14 @@ function AnimeHomePage() {
                     <AnimeSearchFilterDropdowns/>
                 </div>
                 <AnimeCardGrid animeData={animeData} animeSearchIsLoading={animeSearchIsLoading} animeSearchError={animeSearchError} />
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={animeData?.pagination?.last_visible_page ?? 1}
-                    onPageChange={(newPage: number) => {dispatch(animeSearchActions.setCurrentPage(newPage))}}
-                />
+                {animeData && animeData.data.length > 0 &&
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={animeData?.pagination?.last_visible_page ?? 1}
+                        onPageChange={(newPage: number) => {dispatch(animeSearchActions.setCurrentPage(newPage))}}
+                    />
+                }
+
             </section>
         </div>
     );
