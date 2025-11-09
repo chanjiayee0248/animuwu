@@ -22,9 +22,7 @@ function AnimeSearchFilterDropdowns() {
 
 
     return (
-        <div className="space-y-4">
-
-
+        <div className={`flex gap-4`}>
 
 
             <FilterDropdown
@@ -34,22 +32,23 @@ function AnimeSearchFilterDropdowns() {
                 onParamChange={(paramValue) => dispatch(animeSearchActions.setAiringStatus(paramValue))}
             />
             <FilterDropdown
-                label="Audience Rating"
+                label="Maturity"
                 paramValue={audienceRating}
                 displayValueToParamObject={ANIME_AUDIENCE_RATING_DISPLAY_VALUE_TO_PARAM_OBJECT}
                 onParamChange={(paramValue) => dispatch(animeSearchActions.setAudienceRating(paramValue))}
             />
             <FilterDropdown
-                label="Media Format"
+                label="Format"
                 paramValue={mediaFormat}
                 displayValueToParamObject={ANIME_MEDIA_FORMAT_DISPLAY_VALUE_TO_PARAM_OBJECT}
                 onParamChange={(paramValue) => dispatch(animeSearchActions.setMediaFormat(paramValue))}
             />
             <FilterDropdown
-                label="Sort By"
+                label="Order"
                 paramValue={sortCategory}
                 displayValueToParamObject={ANIME_SORT_CATEGORY_DISPLAY_VALUE_TO_PARAM_OBJECT}
                 onParamChange={(paramValue) => dispatch(animeSearchActions.setSortCategory(paramValue))}
+                showOnlyParams={["title","episodes","start_date", "end_date", "score", "rank", "popularity"]}
             />
             <FilterDropdown
                 label="Direction"
@@ -57,12 +56,12 @@ function AnimeSearchFilterDropdowns() {
                 displayValueToParamObject={ANIME_SORT_DIRECTION_DISPLAY_VALUE_TO_PARAM_OBJECT}
                 onParamChange={(paramValue) => dispatch(animeSearchActions.setSortDirection(paramValue))}
             />
-            <button
-                onClick={() => dispatch(animeSearchActions.resetFilters())}
-                className="w-full px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-            >
-                Reset Filters
-            </button>
+            {/*<button*/}
+            {/*    onClick={() => dispatch(animeSearchActions.resetFilters())}*/}
+            {/*    className="w-full px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"*/}
+            {/*>*/}
+            {/*    Reset Filters*/}
+            {/*</button>*/}
         </div>
     )
 }

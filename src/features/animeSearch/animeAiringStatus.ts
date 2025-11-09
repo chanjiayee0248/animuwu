@@ -1,5 +1,5 @@
 export const ANIME_AIRING_STATUS_DISPLAY_VALUE_TO_PARAM_OBJECT = {
-    "All": null,
+    "Any Status": null,
     "Airing": "airing",
     "Completed": "complete",
     "Upcoming": "upcoming",

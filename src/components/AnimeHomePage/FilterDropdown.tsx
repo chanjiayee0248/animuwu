@@ -7,26 +7,33 @@ interface FilterDropdownProps<T extends Record<string, string | number | null>> 
     paramValue: T[keyof T];
     displayValueToParamObject: T; // An object mapping labels (keys) to actual values (parameters)
     onParamChange: (paramValue: T[keyof T]) => void;
+    showOnlyParams?: T[keyof T][];
 }
 
 // Repeat "T" again because otherwise
 //TypeScript says: “I don’t know what T is — it only exists inside the interface, not here.”
 function FilterDropdown<T extends Record<string, string | number | null>>({
-                                                               label,
-                                                               paramValue,
-                                                               displayValueToParamObject,
-                                                               onParamChange,
-                                                           }: FilterDropdownProps<T>) {
+                                                                              label,
+                                                                              paramValue,
+                                                                              displayValueToParamObject,
+                                                                              onParamChange,
+                                                                              showOnlyParams,
+                                                                          }: FilterDropdownProps<T>) {
+    // Compute dropdown options
+    const allOptions = Object.keys(displayValueToParamObject) as (keyof T)[];
+    const dropdownOptions = showOnlyParams
+        ? allOptions.filter((key) => showOnlyParams.includes(displayValueToParamObject[key]))
+        : allOptions;
 
-    const dropdownOptions = Object.keys(displayValueToParamObject);
-    const paramDisplayValue = useParamToDisplayValue(displayValueToParamObject, paramValue);
+    const paramDisplayValue = useParamToDisplayValue(paramValue, displayValueToParamObject);
 
     return (
         <div>
-
-            <label className="block text-sm font-medium mb-1">{label}</label>
             <select
-                className="w-full px-3 py-2 border rounded"
+                aria-label={label}
+                className={`w-full min-w-[12rem] pl-3 pr-4 py-1.5 rounded-lg
+          bg-primary-muted-dark text-primary-muted-bright
+          hover:bg-primary-muted-medium nth-of-type-2:bg-white`}
                 value={String(paramDisplayValue)}
                 onChange={(e) => {
                     const selectedLabel = e.target.value as keyof T;
@@ -37,17 +44,24 @@ function FilterDropdown<T extends Record<string, string | number | null>>({
                             return;
                         }
                     }
-                    onParamChange(displayValueToParamObject[selectedLabel]); // call the parent function with the actual param paramValue
+                    onParamChange(displayValueToParamObject[selectedLabel]);
                 }}
             >
                 {dropdownOptions.map((optionLabel) => (
-                    <option key={String(optionLabel)} value={String(optionLabel)}>
-                        {String(optionLabel)}
+                    <option
+                        key={String(optionLabel)}
+                        value={String(optionLabel)}
+                        className={`p-1 bg-primary-muted-superdark text-primary-muted-bright
+              checked:bg-primary-muted-dark checked:text-white 
+              hover:bg-secondary-muted-dark hover:text-secondary-muted-bright`}
+                    >
+                        {String(optionLabel) + " "}
                     </option>
                 ))}
             </select>
         </div>
     );
 }
+
 
 export default FilterDropdown;

@@ -1,0 +1,10 @@
+select,
+::picker(select) {
+    appearance: base-select;
+}
+
+option::checkmark {
+    order: 1;
+    margin-left: auto;
+    content: "✦";
+}

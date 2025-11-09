@@ -12,7 +12,7 @@ function AnimeSearchBar() {
                 value={searchQuery}
                 onChange={(e) => dispatch(animeSearchActions.setSearchQuery(e.target.value))}
                 placeholder="Search anime..."
-                className="w-full px-3 py-2 border rounded"
+                className={`w-full max-w-[800px] px-3 py-2 bg-primary-base-medium text-white rounded-3xl`}
             />
     )
 }

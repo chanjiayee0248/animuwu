@@ -1,5 +1,5 @@
 export const ANIME_MEDIA_FORMAT_DISPLAY_VALUE_TO_PARAM_OBJECT = {
-    "All": null,
+    "All Formats": null,
     "TV": "tv",
     "Movie": "movie",
     "OVA": "ova",

@@ -26,6 +26,11 @@ Here goes!
   - Creating labels for params and putting them into an object for easier mapping in the UI (eg mapping "TV Show" to "tv" for the API call)
   - Creating TypeScript interfaces from response schema in the Jikan API docs
 
+## CSS Theme Variable Names
+### Prompt: Generate the rest for me [Paste Base Hue vars, Chroma Level vars, Lightness Level vars, and two examples of Primary theme colors]
+- Reasoning: I like using variables for base "aspects" (like hue, chroma, lightness) and then deriving theme colors from those base aspects. It's a one-time templating task and repetitive in nature, practically the perfect use case for AI assistance.
+- Outcome: ChatGPT generated the rest of the CSS variable names for me in `tailwindThemeColors.css`.
+
 ## Managing Typescript Types
 ### Prompt: *What name to give this TypeScript Type *[Paste Enums]*? 
 e.g., the "type" param for "getAnimeSearch" [Enum: "tv" "movie" "ova" "special" "ona" "music" "cm" "pv" "tv_special"]
@@ -48,3 +53,6 @@ Sometimes when Claude/ChatGPT offer up curious suggestions, I end up probing fur
 - ***Interfaces vs Types***: I used to strongly prefer types over interfaces in TS (they felt more "strict" to me), but after ChatGPT suggested a solution using interfaces, I ended up browsing reddit and StackOverflow threads. The conclusion I got was "it depends on the use case" (fair lol, that and intellisense supports interfaces better in some IDEs for union types). I settled on interface for large objects, considering the extend functionality might be useful (eg respose from `getAnimeFullById` vs `getAnimeById`). I eventually circled back around with Claude to my initial query: I intended to define a union of string literals for animeMediaFormats, then use that to type out (?) an object to map to label values in the UI, but Claude went "Hey, if you already know all the values beforehand, why not create a const object, THEN derive the types?" Cue `animeMediaFormats.ts`
 - ***Naming Conventions***: I tried coming up with a descriptive name for jikan api calls. Started out with `fetchAllAnimeByQueryAndPage`, but I wondered if it was too verbose. ChatGPT suggested that since it's the "main" way of fetching data, a general name would be fine, and suggested `fetchAnimeList`, but I felt that would indicate it returned an array rather than a paginated response. Eventually settled on `jikanFetchAnimeSearch` since it does indicate a purpose `fetch` and it's form the `jikan` API, in case I ever need to add other APIs in the future.
 - ***TypeScript Generic Types***: I used to create separate static types for similar structures, but seeing Claude suggest generic types made me curious to learn more. I ended up reading through the TS docs and prompting more about it, and it seems pretty useful for reusable React components which can work with slightly different but still similar data shapes.
+
+## Some Final Thoughts
+- Honestly, I think I trash-talked ChatGPT a bit too much in the beginning. Sometimes it actually performs better than Claude, and I find myself defaulting more to it since I don't have to worry about rate limits (GPT-4 seems to perform more or less as well as GPT-5 in my experience so far).

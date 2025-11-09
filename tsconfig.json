@@ -1,4 +1,5 @@
 {
+  "composite": true,
   "files": [],
   "references": [
     {
@@ -17,6 +18,5 @@
       "vitest/globals",
       "node"
     ]
-  },
-  "include": ["src", "vite.config.ts"]
+  }
 }

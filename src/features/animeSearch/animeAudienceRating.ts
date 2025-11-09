@@ -1,5 +1,5 @@
 export const ANIME_AUDIENCE_RATING_DISPLAY_VALUE_TO_PARAM_OBJECT = {
-    "All": null,
+    "All Maturities": null,
     "G - All Ages": "g",
     "PG - Children": "pg",
     "PG-13 - Teens 13+": "pg13",

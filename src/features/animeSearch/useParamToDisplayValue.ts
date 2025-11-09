@@ -5,8 +5,8 @@ import { useMemo } from 'react';
  * Like a reverse lookup: given "airing", returns "Airing"
  */
 export function useParamToDisplayValue<T extends Record<string, string | number | null>>(
-    displayValueToParamObject: T,
-    currentParamValue: T[keyof T]
+    currentParamValue: T[keyof T],
+    displayValueToParamObject: T
 ): keyof T {
     return useMemo(() => {
         // Find the label that matches the current param value

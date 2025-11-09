@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+@theme {
+    /* ===== Base Hues ===== */
+    --hue-primary: 288;
+    --hue-secondary: 358;
+    --hue-accent: 20;
+
+    /* ===== Chroma Levels ===== */
+    --chroma-vivid: 0.20;
+    --chroma-base: 0.14;
+    --chroma-muted: 0.06;
+    --chroma-greyed: 0.02;
+
+    /* ===== Lightness Levels ===== */
+    --lightness-bright: 0.90;
+    --lightness-standard: 0.80;
+    --lightness-medium: 0.50;
+    --lightness-dark: 0.30;
+    --lightness-superdark: 0.17;
+
+    /* ===== Opacity ===== */
+    --opacity-translucent: 0.5;
+
+    /* ===== PRIMARY ===== */
+    /* vivid */
+    --color-primary-vivid-bright: oklch(var(--lightness-bright) var(--chroma-vivid) var(--hue-primary));
+    --color-primary-vivid-bright-translucent: oklch(var(--lightness-bright) var(--chroma-vivid) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-vivid-standard: oklch(var(--lightness-standard) var(--chroma-vivid) var(--hue-primary));
+    --color-primary-vivid-standard-translucent: oklch(var(--lightness-standard) var(--chroma-vivid) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-vivid-medium: oklch(var(--lightness-medium) var(--chroma-vivid) var(--hue-primary));
+    --color-primary-vivid-medium-translucent: oklch(var(--lightness-medium) var(--chroma-vivid) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-vivid-dark: oklch(var(--lightness-dark) var(--chroma-vivid) var(--hue-primary));
+    --color-primary-vivid-dark-translucent: oklch(var(--lightness-dark) var(--chroma-vivid) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-vivid-superdark: oklch(var(--lightness-superdark) var(--chroma-vivid) var(--hue-primary));
+    --color-primary-vivid-superdark-translucent: oklch(var(--lightness-superdark) var(--chroma-vivid) var(--hue-primary) / var(--opacity-translucent));
+
+    /* base */
+    --color-primary-base-bright: oklch(var(--lightness-bright) var(--chroma-base) var(--hue-primary));
+    --color-primary-base-bright-translucent: oklch(var(--lightness-bright) var(--chroma-base) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-base-standard: oklch(var(--lightness-standard) var(--chroma-base) var(--hue-primary));
+    --color-primary-base-standard-translucent: oklch(var(--lightness-standard) var(--chroma-base) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-base-medium: oklch(var(--lightness-medium) var(--chroma-base) var(--hue-primary));
+    --color-primary-base-medium-translucent: oklch(var(--lightness-medium) var(--chroma-base) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-base-dark: oklch(var(--lightness-dark) var(--chroma-base) var(--hue-primary));
+    --color-primary-base-dark-translucent: oklch(var(--lightness-dark) var(--chroma-base) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-base-superdark: oklch(var(--lightness-superdark) var(--chroma-base) var(--hue-primary));
+    --color-primary-base-superdark-translucent: oklch(var(--lightness-superdark) var(--chroma-base) var(--hue-primary) / var(--opacity-translucent));
+
+    /* muted */
+    --color-primary-muted-bright: oklch(var(--lightness-bright) var(--chroma-muted) var(--hue-primary));
+    --color-primary-muted-bright-translucent: oklch(var(--lightness-bright) var(--chroma-muted) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-muted-standard: oklch(var(--lightness-standard) var(--chroma-muted) var(--hue-primary));
+    --color-primary-muted-standard-translucent: oklch(var(--lightness-standard) var(--chroma-muted) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-muted-medium: oklch(var(--lightness-medium) var(--chroma-muted) var(--hue-primary));
+    --color-primary-muted-medium-translucent: oklch(var(--lightness-medium) var(--chroma-muted) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-muted-dark: oklch(var(--lightness-dark) var(--chroma-muted) var(--hue-primary));
+    --color-primary-muted-dark-translucent: oklch(var(--lightness-dark) var(--chroma-muted) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-muted-superdark: oklch(var(--lightness-superdark) var(--chroma-muted) var(--hue-primary));
+    --color-primary-muted-superdark-translucent: oklch(var(--lightness-superdark) var(--chroma-muted) var(--hue-primary) / var(--opacity-translucent));
+
+    /* greyed */
+    --color-primary-greyed-bright: oklch(var(--lightness-bright) var(--chroma-greyed) var(--hue-primary));
+    --color-primary-greyed-bright-translucent: oklch(var(--lightness-bright) var(--chroma-greyed) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-greyed-standard: oklch(var(--lightness-standard) var(--chroma-greyed) var(--hue-primary));
+    --color-primary-greyed-standard-translucent: oklch(var(--lightness-standard) var(--chroma-greyed) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-greyed-medium: oklch(var(--lightness-medium) var(--chroma-greyed) var(--hue-primary));
+    --color-primary-greyed-medium-translucent: oklch(var(--lightness-medium) var(--chroma-greyed) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-greyed-dark: oklch(var(--lightness-dark) var(--chroma-greyed) var(--hue-primary));
+    --color-primary-greyed-dark-translucent: oklch(var(--lightness-dark) var(--chroma-greyed) var(--hue-primary) / var(--opacity-translucent));
+    --color-primary-greyed-superdark: oklch(var(--lightness-superdark) var(--chroma-greyed) var(--hue-primary));
+    --color-primary-greyed-superdark-translucent: oklch(var(--lightness-superdark) var(--chroma-greyed) var(--hue-primary) / var(--opacity-translucent));
+
+    /* ===== SECONDARY ===== */
+    /* vivid */
+    --color-secondary-vivid-bright: oklch(var(--lightness-bright) var(--chroma-vivid) var(--hue-secondary));
+    --color-secondary-vivid-bright-translucent: oklch(var(--lightness-bright) var(--chroma-vivid) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-vivid-standard: oklch(var(--lightness-standard) var(--chroma-vivid) var(--hue-secondary));
+    --color-secondary-vivid-standard-translucent: oklch(var(--lightness-standard) var(--chroma-vivid) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-vivid-medium: oklch(var(--lightness-medium) var(--chroma-vivid) var(--hue-secondary));
+    --color-secondary-vivid-medium-translucent: oklch(var(--lightness-medium) var(--chroma-vivid) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-vivid-dark: oklch(var(--lightness-dark) var(--chroma-vivid) var(--hue-secondary));
+    --color-secondary-vivid-dark-translucent: oklch(var(--lightness-dark) var(--chroma-vivid) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-vivid-superdark: oklch(var(--lightness-superdark) var(--chroma-vivid) var(--hue-secondary));
+    --color-secondary-vivid-superdark-translucent: oklch(var(--lightness-superdark) var(--chroma-vivid) var(--hue-secondary) / var(--opacity-translucent));
+
+    /* base */
+    --color-secondary-base-bright: oklch(var(--lightness-bright) var(--chroma-base) var(--hue-secondary));
+    --color-secondary-base-bright-translucent: oklch(var(--lightness-bright) var(--chroma-base) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-base-standard: oklch(var(--lightness-standard) var(--chroma-base) var(--hue-secondary));
+    --color-secondary-base-standard-translucent: oklch(var(--lightness-standard) var(--chroma-base) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-base-medium: oklch(var(--lightness-medium) var(--chroma-base) var(--hue-secondary));
+    --color-secondary-base-medium-translucent: oklch(var(--lightness-medium) var(--chroma-base) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-base-dark: oklch(var(--lightness-dark) var(--chroma-base) var(--hue-secondary));
+    --color-secondary-base-dark-translucent: oklch(var(--lightness-dark) var(--chroma-base) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-base-superdark: oklch(var(--lightness-superdark) var(--chroma-base) var(--hue-secondary));
+    --color-secondary-base-superdark-translucent: oklch(var(--lightness-superdark) var(--chroma-base) var(--hue-secondary) / var(--opacity-translucent));
+
+    /* muted */
+    --color-secondary-muted-bright: oklch(var(--lightness-bright) var(--chroma-muted) var(--hue-secondary));
+    --color-secondary-muted-bright-translucent: oklch(var(--lightness-bright) var(--chroma-muted) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-muted-standard: oklch(var(--lightness-standard) var(--chroma-muted) var(--hue-secondary));
+    --color-secondary-muted-standard-translucent: oklch(var(--lightness-standard) var(--chroma-muted) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-muted-medium: oklch(var(--lightness-medium) var(--chroma-muted) var(--hue-secondary));
+    --color-secondary-muted-medium-translucent: oklch(var(--lightness-medium) var(--chroma-muted) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-muted-dark: oklch(var(--lightness-dark) var(--chroma-muted) var(--hue-secondary));
+    --color-secondary-muted-dark-translucent: oklch(var(--lightness-dark) var(--chroma-muted) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-muted-superdark: oklch(var(--lightness-superdark) var(--chroma-muted) var(--hue-secondary));
+    --color-secondary-muted-superdark-translucent: oklch(var(--lightness-superdark) var(--chroma-muted) var(--hue-secondary) / var(--opacity-translucent));
+
+    /* greyed */
+    --color-secondary-greyed-bright: oklch(var(--lightness-bright) var(--chroma-greyed) var(--hue-secondary));
+    --color-secondary-greyed-bright-translucent: oklch(var(--lightness-bright) var(--chroma-greyed) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-greyed-standard: oklch(var(--lightness-standard) var(--chroma-greyed) var(--hue-secondary));
+    --color-secondary-greyed-standard-translucent: oklch(var(--lightness-standard) var(--chroma-greyed) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-greyed-medium: oklch(var(--lightness-medium) var(--chroma-greyed) var(--hue-secondary));
+    --color-secondary-greyed-medium-translucent: oklch(var(--lightness-medium) var(--chroma-greyed) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-greyed-dark: oklch(var(--lightness-dark) var(--chroma-greyed) var(--hue-secondary));
+    --color-secondary-greyed-dark-translucent: oklch(var(--lightness-dark) var(--chroma-greyed) var(--hue-secondary) / var(--opacity-translucent));
+    --color-secondary-greyed-superdark: oklch(var(--lightness-superdark) var(--chroma-greyed) var(--hue-secondary));
+    --color-secondary-greyed-superdark-translucent: oklch(var(--lightness-superdark) var(--chroma-greyed) var(--hue-secondary) / var(--opacity-translucent));
+
+    /* ===== ACCENT ===== */
+    /* vivid */
+    --color-accent-vivid-bright: oklch(var(--lightness-bright) var(--chroma-vivid) var(--hue-accent));
+    --color-accent-vivid-bright-translucent: oklch(var(--lightness-bright) var(--chroma-vivid) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-vivid-standard: oklch(var(--lightness-standard) var(--chroma-vivid) var(--hue-accent));
+    --color-accent-vivid-standard-translucent: oklch(var(--lightness-standard) var(--chroma-vivid) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-vivid-medium: oklch(var(--lightness-medium) var(--chroma-vivid) var(--hue-accent));
+    --color-accent-vivid-medium-translucent: oklch(var(--lightness-medium) var(--chroma-vivid) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-vivid-dark: oklch(var(--lightness-dark) var(--chroma-vivid) var(--hue-accent));
+    --color-accent-vivid-dark-translucent: oklch(var(--lightness-dark) var(--chroma-vivid) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-vivid-superdark: oklch(var(--lightness-superdark) var(--chroma-vivid) var(--hue-accent));
+    --color-accent-vivid-superdark-translucent: oklch(var(--lightness-superdark) var(--chroma-vivid) var(--hue-accent) / var(--opacity-translucent));
+
+    /* base */
+    --color-accent-base-bright: oklch(var(--lightness-bright) var(--chroma-base) var(--hue-accent));
+    --color-accent-base-bright-translucent: oklch(var(--lightness-bright) var(--chroma-base) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-base-standard: oklch(var(--lightness-standard) var(--chroma-base) var(--hue-accent));
+    --color-accent-base-standard-translucent: oklch(var(--lightness-standard) var(--chroma-base) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-base-medium: oklch(var(--lightness-medium) var(--chroma-base) var(--hue-accent));
+    --color-accent-base-medium-translucent: oklch(var(--lightness-medium) var(--chroma-base) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-base-dark: oklch(var(--lightness-dark) var(--chroma-base) var(--hue-accent));
+    --color-accent-base-dark-translucent: oklch(var(--lightness-dark) var(--chroma-base) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-base-superdark: oklch(var(--lightness-superdark) var(--chroma-base) var(--hue-accent));
+    --color-accent-base-superdark-translucent: oklch(var(--lightness-superdark) var(--chroma-base) var(--hue-accent) / var(--opacity-translucent));
+
+    /* muted */
+    --color-accent-muted-bright: oklch(var(--lightness-bright) var(--chroma-muted) var(--hue-accent));
+    --color-accent-muted-bright-translucent: oklch(var(--lightness-bright) var(--chroma-muted) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-muted-standard: oklch(var(--lightness-standard) var(--chroma-muted) var(--hue-accent));
+    --color-accent-muted-standard-translucent: oklch(var(--lightness-standard) var(--chroma-muted) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-muted-medium: oklch(var(--lightness-medium) var(--chroma-muted) var(--hue-accent));
+    --color-accent-muted-medium-translucent: oklch(var(--lightness-medium) var(--chroma-muted) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-muted-dark: oklch(var(--lightness-dark) var(--chroma-muted) var(--hue-accent));
+    --color-accent-muted-dark-translucent: oklch(var(--lightness-dark) var(--chroma-muted) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-muted-superdark: oklch(var(--lightness-superdark) var(--chroma-muted) var(--hue-accent));
+    --color-accent-muted-superdark-translucent: oklch(var(--lightness-superdark) var(--chroma-muted) var(--hue-accent) / var(--opacity-translucent));
+
+    /* greyed */
+    --color-accent-greyed-bright: oklch(var(--lightness-bright) var(--chroma-greyed) var(--hue-accent));
+    --color-accent-greyed-bright-translucent: oklch(var(--lightness-bright) var(--chroma-greyed) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-greyed-standard: oklch(var(--lightness-standard) var(--chroma-greyed) var(--hue-accent));
+    --color-accent-greyed-standard-translucent: oklch(var(--lightness-standard) var(--chroma-greyed) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-greyed-medium: oklch(var(--lightness-medium) var(--chroma-greyed) var(--hue-accent));
+    --color-accent-greyed-medium-translucent: oklch(var(--lightness-medium) var(--chroma-greyed) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-greyed-dark: oklch(var(--lightness-dark) var(--chroma-greyed) var(--hue-accent));
+    --color-accent-greyed-dark-translucent: oklch(var(--lightness-dark) var(--chroma-greyed) var(--hue-accent) / var(--opacity-translucent));
+    --color-accent-greyed-superdark: oklch(var(--lightness-superdark) var(--chroma-greyed) var(--hue-accent));
+    --color-accent-greyed-superdark-translucent: oklch(var(--lightness-superdark) var(--chroma-greyed) var(--hue-accent) / var(--opacity-translucent));
+}
