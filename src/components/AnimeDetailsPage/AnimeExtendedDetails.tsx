@@ -1,16 +1,20 @@
 import AnimeExtendedDetailsHeaderContainer from "@/components/AnimeDetailsPage/AnimeExtendedDetailsHeaderContainer.tsx";
 import {disableUrlEmbedAutoplay} from "@/utils/disableUrlEmbedAutoplay.ts";
+import type {JikanAnimeMalUrlResourceInterface} from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
+import {ExternalLinkIcon} from "lucide-react";
 
 interface AnimeExtendedDetailsProps {
     synopsis: string | null;
     background: string | null;
     trailerEmbedUrl: string | null;
+    studios: JikanAnimeMalUrlResourceInterface[];
 }
 
 export function AnimeExtendedDetails({
                                          synopsis,
                                          background,
-                                         trailerEmbedUrl
+                                         trailerEmbedUrl,
+                                         studios
                                      }: AnimeExtendedDetailsProps) {
 
 
@@ -47,6 +51,34 @@ export function AnimeExtendedDetails({
                             allowFullScreen
                         ></iframe>
                     </div>
+                </AnimeExtendedDetailsHeaderContainer>
+            }
+            {
+                studios.length > 0 &&
+                <AnimeExtendedDetailsHeaderContainer headerText={"Studios"}>
+                    <ul className={`flex flex-wrap gap-3 text-primary-greyed-bright`}>
+                        {
+                            studios.map((studio) => (
+                                <li key={studio.mal_id} className={`list-none`}>
+                                    <div className={`bg-primary-muted-superdark-translucent px-3 py-1 rounded-lg inline-block`}>
+                                        {studio.url ? (
+                                            <a
+                                                href={studio.url}
+                                                target={"_blank"}
+                                                rel={"noopener noreferrer"}
+                                                className={`inline-flex items-center gap-2 hover:underline`}
+                                            >
+                                                {studio.name}
+                                                <ExternalLinkIcon className={`w-3 h-3`} />
+                                            </a>
+                                        ) : (
+                                            <span>{studio.name}</span>
+                                        )}
+                                    </div>
+                                </li>
+                            ))
+                        }
+                    </ul>
                 </AnimeExtendedDetailsHeaderContainer>
             }
 

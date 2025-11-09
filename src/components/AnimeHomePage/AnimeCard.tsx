@@ -1,5 +1,6 @@
 import {StarIcon, CalendarIcon} from "lucide-react";
 import {Link} from "react-router-dom";
+import {placeholderImage} from "@/assets/img";
 
 interface AnimeCardProps {
     id: string;
@@ -29,8 +30,7 @@ export function AnimeCard({id, title, imageUrl, score, mediaFormat, airDateStrin
                         </>
                 }
             </div>
-            {/*{TODO: ACTUALLY FIND A PLACEHOLDER}*/}
-            <img src={imageUrl ?? "./placeholder-image.png"} alt={title}
+            <img src={imageUrl ?? placeholderImage} alt={title}
                  loading="lazy"
                  className={`anime-card-image object-cover aspect-3/4 w-full transform transition-transform duration-200 ease-in-out group-hover:scale-[1.05]`} />
             <div className={`relative flex flex-col gap-1 p-2 text-primary-muted-bright text-sm font-bold bg-primary-muted-dark`}>

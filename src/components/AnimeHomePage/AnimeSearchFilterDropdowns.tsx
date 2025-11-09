@@ -10,9 +10,6 @@ import {animeSearchActions} from "@/store/animeSearchSlice";
 function AnimeSearchFilterDropdowns() {
     const dispatch = useAppDispatch();
 
-    //TODO: Move Searchbar id its own component
-    // Read current values from Redux store
-
     const airingStatus = useAppSelector((state) => state.animeSearch.airingStatus);
     const audienceRating = useAppSelector((state) => state.animeSearch.audienceRating);
     const mediaFormat = useAppSelector((state) => state.animeSearch.mediaFormat);

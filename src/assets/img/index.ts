@@ -1,0 +1,1 @@
+export {default as placeholderImage} from "./placeholderImage.jpg"

@@ -103,7 +103,7 @@ function AnimeDetailsPage() {
     // Map genre objects to string names to avoid rendering objects in JSX
     const genreNames = Array.isArray(data.genres) ? data.genres.map(g => g.name) : [];
 
-    //TODO: PLACEHOLDER IMAGE
+
     return (
         <div className={`w-full min-h-dvh flex flex-col items-center gap-8`}>
             <AnimeMainDetails
@@ -134,6 +134,7 @@ function AnimeDetailsPage() {
                         synopsis={data.synopsis}
                         background={data.background}
                         trailerEmbedUrl={data.trailer.embed_url}
+                        studios={data.studios}
                     />
                 </div>
             </div>

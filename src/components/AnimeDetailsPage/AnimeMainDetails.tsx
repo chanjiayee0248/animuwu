@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import {ClockIcon} from "lucide-react";
 import {useEffect, useRef, useState} from "react";
+import {placeholderImage} from "@/assets/img";
 
 interface AnimeMainDetailsProps {
     englishTitle: string;
@@ -70,7 +71,7 @@ function AnimeMainDetails({
                     </button>
                 </Link>
                 <div className={`w-full px-4 flex gap-12 items-end`}>
-                    <img className={`object-cover aspect-9/14 rounded-md w-[240px]`} src={imageUrl}/>
+                    <img className={`object-cover aspect-9/14 rounded-md w-[240px]`} src={imageUrl || placeholderImage}/>
                     <div className={`w-full flex flex-col gap-4`}>
                         <div className={`flex gap-4`}>
                             <p className={`${tagStyle} bg-accent-base-standard text-accent-base-dark`}>{mediaType}</p>
