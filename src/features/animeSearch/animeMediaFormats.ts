@@ -19,7 +19,7 @@ export function getAnimeMediaFormatParamFromLabel(label: AnimeMediaFormatLabelTy
     return ANIME_MEDIA_FORMAT_DISPLAY_VALUE_TO_PARAM_OBJECT[label];
 }
 
-// O(n) time complexity, fine for now, but possible refactor to use a reverse mapping if performance becomes an issue
+// O(n) time complexity, fine for now, but possible refactor id use a reverse mapping if performance becomes an issue
 export function getAnimeMediaFormatLabelFromParam(
     param: DefinedAnimeMediaFormatParamType
 ): AnimeMediaFormatLabelType {

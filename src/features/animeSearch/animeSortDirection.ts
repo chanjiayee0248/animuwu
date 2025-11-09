@@ -1,6 +1,6 @@
 export const ANIME_SORT_DIRECTION_DISPLAY_VALUE_TO_PARAM_OBJECT = {
-    "Desc.": "desc",
-    "Asc.": "asc",
+    "Sort Desc.": "desc",
+    "Sort Asc.": "asc",
 } as const;
 
 export type AnimeSortDirectionLabelType = keyof typeof ANIME_SORT_DIRECTION_DISPLAY_VALUE_TO_PARAM_OBJECT;

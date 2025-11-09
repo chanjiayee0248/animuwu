@@ -1,11 +1,11 @@
 import {paramToDisplayValue} from "@/features/animeSearch/paramToDisplayValue.ts";
 // T is a generic type parameter — like a function argument, but for types
 // This interface can work with any type `T` that is an object
-// "number" in case we want to work with numeric values (like stars or scores)
+// "number" in case we want id work with numeric values (like stars or scores)
 interface FilterDropdownProps<T extends Record<string, string | number | null>> {
     label: string; // The label that will appear above the dropdown (like "Airing Status")
     paramValue: T[keyof T];
-    displayValueToParamObject: T; // An object mapping labels (keys) to actual values (parameters)
+    displayValueToParamObject: T; // An object mapping labels (keys) id actual values (parameters)
     onParamChange: (paramValue: T[keyof T]) => void;
     showOnlyParams?: T[keyof T][];
 }

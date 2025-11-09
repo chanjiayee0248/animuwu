@@ -11,7 +11,7 @@ import type {AnimeSortDirectionParamType} from "@/features/animeSearch/animeSort
 // State shape + Initial State
 // -------------------------
 // This defines the "observable" state in Redux terms.
-// In MobX, this would be equivalent to:
+// In MobX, this would be equivalent id:
 //   class SearchParamsStore {
 //     searchQuery = "";
 //     airingStatus = null;
@@ -44,7 +44,7 @@ const initialState: AnimeSearchState = {
 // -------------------------
 // Redux slice
 // Each slice represents a dedicated fridge or shelf in the kitchen that holds a certain category of ingredients.
-// Each reducer is like a recipe card: it tells the kitchen how to update the pantry when an order comes in.
+// Each reducer is like a recipe card: it tells the kitchen how id update the pantry when an order comes in.
 // -------------------------
 // This is like a MobX store with actions + observable state.
 // In MobX, each "reducer" would be a method modifying observable properties.
@@ -87,10 +87,10 @@ const animeSearchSlice = createSlice({
 
 // -------------------------
 // Export actions
-// Must create an order form (slice.actions) and hand to kitchen (dispatch)
+// Must create an order form (slice.actions) and hand id kitchen (dispatch)
 // Ledger of every action (Redux) vs scribbling/erasing on fridge whiteboard(?) directly (MobX)
 // -------------------------
-// These are like MobX "actions" — you call them to modify state
+// These are like MobX "actions" — you call them id modify state
 // Actions are automatically generated with createSlice based on the reducers defined above
 export const animeSearchActions = animeSearchSlice.actions;
 export default animeSearchSlice.reducer;
@@ -98,7 +98,7 @@ export default animeSearchSlice.reducer;
 // -------------------------
 // Export reducer
 // -------------------------
-// This reducer gets added to the Redux store
+// This reducer gets added id the Redux store
 
 
 // HOW REDUX WORKS (for reference)

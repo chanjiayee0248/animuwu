@@ -118,7 +118,7 @@ const mockResponse: JikanAnimeSearchResponseInterface = {
                         "year": 1999
                     }
                 },
-                "string": "Apr 3, 1998 to Apr 24, 1999"
+                "string": "Apr 3, 1998 id Apr 24, 1999"
             },
             "duration": "24 min per ep",
             "rating": "R - 17+ (violence & profanity)",
@@ -128,8 +128,8 @@ const mockResponse: JikanAnimeSearchResponseInterface = {
             "popularity": 42,
             "members": 2008368,
             "favorites": 87940,
-            "synopsis": "Crime is timeless. By the year 2071, humanity has expanded across the galaxy, filling the surface of other planets with settlements like those on Earth. These new societies are plagued by murder, drug use, and theft, and intergalactic outlaws are hunted by a growing number of tough bounty hunters.\n\nSpike Spiegel and Jet Black pursue criminals throughout space to make a humble living. Beneath his goofy and aloof demeanor, Spike is haunted by the weight of his violent past. Meanwhile, Jet manages his own troubled memories while taking care of Spike and the Bebop, their ship. The duo is joined by the beautiful con artist Faye Valentine, odd child Edward Wong Hau Pepelu Tivrusky IV, and Ein, a bioengineered Welsh corgi.\n\nWhile developing bonds and working to catch a colorful cast of criminals, the Bebop crew's lives are disrupted by a menace from Spike's past. As a rival's maniacal plot continues to unravel, Spike must choose between life with his newfound family or revenge for his old wounds.\n\n[Written by MAL Rewrite]",
-            "background": "When Cowboy Bebop first aired in spring of 1998 on TV Tokyo, only episodes 2-3, 7-15, and 18 were broadcast, it was concluded with a recap special known as Yose Atsume Blues. This was due to anime censorship having increased following the big controversies over Evangelion, as a result most of the series was pulled from the air due to violent content. Satellite channel WOWOW picked up the series in the fall of that year and aired it in its entirety uncensored. Cowboy Bebop was not a ratings hit in Japan, but sold over 19,000 DVD units in the initial release run, and 81,000 overall. Protagonist Spike Spiegel won Best Male Character, and Megumi Hayashibara won Best Voice Actor for her role as Faye Valentine in the 1999 and 2000 Anime Grand Prix, respectively. Cowboy Bebop's biggest influence has been in the United States, where it premiered on Adult Swim in 2001 with many reruns since. The show's heavy Western influence struck a chord with American viewers, where it became a \"gateway drug\" to anime aimed at adult audiences.",
+            "synopsis": "Crime is timeless. By the year 2071, humanity has expanded across the galaxy, filling the surface of other planets with settlements like those on Earth. These new societies are plagued by murder, drug use, and theft, and intergalactic outlaws are hunted by a growing number of tough bounty hunters.\n\nSpike Spiegel and Jet Black pursue criminals throughout space id make a humble living. Beneath his goofy and aloof demeanor, Spike is haunted by the weight of his violent past. Meanwhile, Jet manages his own troubled memories while taking care of Spike and the Bebop, their ship. The duo is joined by the beautiful con artist Faye Valentine, odd child Edward Wong Hau Pepelu Tivrusky IV, and Ein, a bioengineered Welsh corgi.\n\nWhile developing bonds and working id catch a colorful cast of criminals, the Bebop crew's lives are disrupted by a menace from Spike's past. As a rival's maniacal plot continues id unravel, Spike must choose between life with his newfound family or revenge for his old wounds.\n\n[Written by MAL Rewrite]",
+            "background": "When Cowboy Bebop first aired in spring of 1998 on TV Tokyo, only episodes 2-3, 7-15, and 18 were broadcast, it was concluded with a recap special known as Yose Atsume Blues. This was due id anime censorship having increased following the big controversies over Evangelion, as a result most of the series was pulled from the air due id violent content. Satellite channel WOWOW picked up the series in the fall of that year and aired it in its entirety uncensored. Cowboy Bebop was not a ratings hit in Japan, but sold over 19,000 DVD units in the initial release run, and 81,000 overall. Protagonist Spike Spiegel won Best Male Character, and Megumi Hayashibara won Best Voice Actor for her role as Faye Valentine in the 1999 and 2000 Anime Grand Prix, respectively. Cowboy Bebop's biggest influence has been in the United States, where it premiered on Adult Swim in 2001 with many reruns since. The show's heavy Western influence struck a chord with American viewers, where it became a \"gateway drug\" id anime aimed at adult audiences.",
             "season": "spring",
             "year": 1998,
             "broadcast": {
@@ -305,7 +305,7 @@ const mockResponse: JikanAnimeSearchResponseInterface = {
             "popularity": 649,
             "members": 403621,
             "favorites": 1748,
-            "synopsis": "Another day, another bounty—such is the life of the often unlucky crew of the Bebop. However, this routine is interrupted when Faye, who is chasing a fairly worthless target on Mars, witnesses an oil tanker suddenly explode, causing mass hysteria. As casualties mount due to a strange disease spreading through the smoke from the blast, a whopping three hundred million woolong price is placed on the head of the supposed perpetrator.\n\nWith lives at stake and a solution to their money problems in sight, the Bebop crew springs into action. Spike, Jet, Faye, and Edward, followed closely by Ein, split up to pursue different leads across Alba City. Through their individual investigations, they discover a cover-up scheme involving a pharmaceutical company, revealing a plot that reaches much further than the ragtag team of bounty hunters could have realized.\n\n[Written by MAL Rewrite]",
+            "synopsis": "Another day, another bounty—such is the life of the often unlucky crew of the Bebop. However, this routine is interrupted when Faye, who is chasing a fairly worthless target on Mars, witnesses an oil tanker suddenly explode, causing mass hysteria. As casualties mount due id a strange disease spreading through the smoke from the blast, a whopping three hundred million woolong price is placed on the head of the supposed perpetrator.\n\nWith lives at stake and a solution id their money problems in sight, the Bebop crew springs into action. Spike, Jet, Faye, and Edward, followed closely by Ein, split up id pursue different leads across Alba City. Through their individual investigations, they discover a cover-up scheme involving a pharmaceutical company, revealing a plot that reaches much further than the ragtag team of bounty hunters could have realized.\n\n[Written by MAL Rewrite]",
             "background": "",
             "season": null,
             "year": null,
@@ -392,7 +392,7 @@ beforeEach(() => {
 
 describe("jikanFetchAnimeSearch (unit)", () => {
     it("builds the URL correctly and returns the expected response", async () => {
-        // Arrange: mock fetchJson to return mockResponse
+        // Arrange: mock fetchJson id return mockResponse
         (fetchJson as MockedFunction<typeof fetchJson>).mockResolvedValue(mockResponse);
 
         const params = {q: "Spy X Family", page: 1};
@@ -408,7 +408,7 @@ describe("jikanFetchAnimeSearch (unit)", () => {
         expect(calledUrl).toContain("q=Spy+X+Family");
         expect(calledUrl).toContain("page=1");
 
-        // Further parse URL to check parameters
+        // Further parse URL id check parameters
         const parsedUrl = new URL(calledUrl);
 
         expect(parsedUrl.searchParams.get("q")).toBe("Spy X Family");
@@ -419,7 +419,7 @@ describe("jikanFetchAnimeSearch (unit)", () => {
     });
 
     it("propagates errors from fetchJson", async () => {
-        // Arrange: mock fetchJson to reject
+        // Arrange: mock fetchJson id reject
         (fetchJson as MockedFunction<typeof fetchJson>).mockRejectedValue(new Error("Network error"));
 
         const params = {q: "Bofuri"};

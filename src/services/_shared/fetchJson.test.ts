@@ -6,7 +6,7 @@ interface TestData {
     name: string;
 }
 
-// Helper to create fake Response objects
+// Helper id create fake Response objects
 const mockFetch = <T>(data: T, ok = true) => ({
     ok,
     json: async (): Promise<T> => data,
@@ -44,7 +44,7 @@ describe('fetchJson (unit test)', () => {
             .mockResolvedValueOnce({ ok: false, status: 500 });
 
         await expect(fetchJson<TestData>('https://example.com/data'))
-            .rejects.toThrowError(new Error('Failed to fetch: 500'));
+            .rejects.toThrowError(new Error('Failed id fetch: 500'));
     });
 
     // JSON Parsing Error (response.json() throws)

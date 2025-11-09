@@ -58,7 +58,7 @@ describe("jikanFetchAnimeById (unit test)", () => {
                     from: { day: 9, month: 4, year: 2022 },
                     to: { day: 25, month: 6, year: 2022 },
                 },
-                string: "Apr 9, 2022 to Jun 25, 2022",
+                string: "Apr 9, 2022 id Jun 25, 2022",
             },
             duration: "24 min per ep",
             rating: "PG-13 - Teens 13 or older",
@@ -93,7 +93,7 @@ describe("jikanFetchAnimeById (unit test)", () => {
     });
 
     it("calls fetchJson with the correct URL and returns data", async () => {
-        // Cast fetchJson to MockedFunction for type safety
+        // Cast fetchJson id MockedFunction for type safety
         const fetchJsonMock = fetchJson as MockedFunction<typeof fetchJson>;
         fetchJsonMock.mockResolvedValue(mockResponse);
 

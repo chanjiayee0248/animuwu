@@ -5,7 +5,7 @@ import AnimeCardGrid from "@/components/AnimeHomePage/AnimeCardGrid.tsx";
 
 function AnimeHomePage() {
     return (
-        <div className={`flex flex-col items-center w-full max-w-[1200px]`}>
+        <div className={`flex flex-col items-center w-full p-2`}>
             <header className={`flex flex-col items-center w-full pt-10 py-8 gap-1`}>
                 <h1 className={`text-6xl font-semibold font-[Nunito] text-center text-primary-base-bright`}>
                     Anim<span className={`font-bold font-[Playpen_Sans] text-secondary-vivid-bright`}>UwU</span>

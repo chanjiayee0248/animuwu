@@ -6,7 +6,7 @@
         background-color: var(--color-primary-muted-dark);
         border-radius: var(--radius-lg);
         box-shadow: var(--shadow-xl);
-        max-width: 200px;
+        width: 240px;
         overflow: hidden;
     }
 
@@ -20,7 +20,7 @@
         top: 4px;
         right: 4px;
         box-shadow: 0 0 2px rgba(0, 0, 0);
-        min-width: 3rem;
+        min-width: 3.4rem;
         min-height: 1.25rem;
         border-radius: var(--radius-2xl);
         z-index: 1;

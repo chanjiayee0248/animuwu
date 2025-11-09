@@ -7,31 +7,7 @@ import {useEffect, useRef, useState} from "react";
 import type {
     JikanAnimeSearchResponseInterface,
 } from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
-import type {AnimeMediaFormatParamType} from "@/features/animeSearch/animeMediaFormats";
 import {getPreferredJikanAnimeTitle} from "@/services/jikanApi/utils/getPreferredJikanAnimeTitle.ts";
-
-/**
- * Convert API response type format (e.g., "TV", "Movie") to param format (e.g., "tv", "movie")
- */
-function convertApiTypeToParam(apiType: "TV" | "OVA" | "Movie" | "Special" | "ONA" | "Music" | null): AnimeMediaFormatParamType {
-    if (apiType === null) return null;
-
-    const typeMap: Record<string, AnimeMediaFormatParamType> = {
-        "TV": "tv",
-        "Movie": "movie",
-        "OVA": "ova",
-        "Special": "special",
-        "ONA": "ona",
-        "Music": "music",
-    };
-
-    return typeMap[apiType] || null;
-}
-
-/**
- * Pick the preferred title from the Jikan titles array.
- * Preference order: English -> Default -> first entry -> fallback string
- */
 
 
 function AnimeCardGrid() {
@@ -50,10 +26,10 @@ function AnimeCardGrid() {
         animeSearchError
     } = useAppSelector((state) => state.animeSearch);
 
-    // Local state to store the fetched anime data
+    // Local state id store the fetched anime data
     const [animeData, setAnimeData] = useState<JikanAnimeSearchResponseInterface | null>(null);
 
-    // Ref to track debounce timeout
+    // Ref id track debounce timeout
     const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
@@ -105,7 +81,7 @@ function AnimeCardGrid() {
 
     // Always render a single grid wrapper; conditionally show skeletons, error, cards, or empty state inside it
     return (
-        <div className="w-full grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-x-4 gap-y-6 justify-items-center">
+        <div className="w-full max-w-[1300px] grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-x-2 gap-y-6 justify-items-center">
             {animeSearchIsLoading ? (
                 // Loading skeletons
                 Array.from({length: 25}).map((_, index) => (
@@ -124,9 +100,10 @@ function AnimeCardGrid() {
                         title={getPreferredJikanAnimeTitle(anime.titles)}
                         imageUrl={anime.images.jpg.large_image_url || anime.images.jpg.image_url}
                         score={anime.score}
-                        mediaFormatParam={convertApiTypeToParam(anime.type)}
+                        mediaFormat={anime.type}
                         airDateString={anime.aired.from}
                         episodeCount={anime.episodes}
+                        id={anime.mal_id.toString()}
                     />
                 ))
             ) : (

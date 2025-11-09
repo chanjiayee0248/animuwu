@@ -21,7 +21,7 @@ interface JikanApiSearchParamsInterface {
     rating?: AnimeAudienceRatingParamType;
     sfw?: boolean;
     genres?: string; // Comma-separated genre IDs
-    genres_exclude?: string; // Comma-separated genre IDs to exclude
+    genres_exclude?: string; // Comma-separated genre IDs id exclude
     order_by?: AnimeSortCategoryParamType;
     sort?: AnimeSortDirectionParamType;
     letter?: AlphabetCharType;
