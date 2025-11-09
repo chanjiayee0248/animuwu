@@ -5,7 +5,14 @@ import { jikanFetchAnimeSearch } from "@/services/jikanApi/api/jikanFetchAnimeSe
 import type { JikanAnimeSearchResponseInterface } from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
 import { isAbortError } from "@/services/_shared/isAbortError.ts";
 
-export function useAnimeSearch() {
+interface UseAnimeSearchReturn {
+    animeData: JikanAnimeSearchResponseInterface | null;
+    animeSearchIsLoading: boolean;
+    animeSearchError: string | null;
+    currentPage: number;
+}
+
+export function useAnimeSearch():UseAnimeSearchReturn  {
     const dispatch = useAppDispatch();
 
     // Get all search parameters from the store
