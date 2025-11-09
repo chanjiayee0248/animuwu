@@ -10,7 +10,7 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<AnimeHomePage />} />
-            <Route path="/anime/:id" element={<AnimeDetailsPage />} />
+            <Route path="/anime/:animeId" element={<AnimeDetailsPage />} />
             <Route path="*" element={<NotFoundPage/>} />
         </Routes>
     )

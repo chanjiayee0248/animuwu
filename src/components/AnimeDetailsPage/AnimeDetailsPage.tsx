@@ -1,17 +1,15 @@
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-function getLastPathSegment(pathname: string): string {
-    const segments = pathname.split('/').filter(Boolean);
-    return segments.length ? decodeURIComponent(segments[segments.length - 1]) : '';
-}
+type Params = {
+    animeId?: string;
+};
 
 function AnimeDetailsPage() {
-    const { pathname } = useLocation();
-    const id = getLastPathSegment(pathname);
+    const { animeId } = useParams<Params>();
 
     return (
         <div>
-            {id ? `ID: ${id}` : 'No id found in URL'}
+            {animeId ? `ID: ${animeId}` : 'No id found in URL'}
         </div>
     );
 }

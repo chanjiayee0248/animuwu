@@ -60,6 +60,11 @@ e.g., the "type" param for "getAnimeSearch" [Enum: "tv" "movie" "ova" "special" 
 - Reasoning: Creating skeleton components can be a bit tedious, especially when the original component is complext. Since the structure is already there, there is less worry about AI hallucinating or misunderstanding the requirements.
 - Outcome: Copilot generated skeleton components based on the original component code I provided. I then reviewed and adjusted the code (e.g. trimming unnecessary classes, adjusting styles/colors etc).
 
+### Loader
+### Prompt: Help me create a loader component that looks like a circle chasing its fading tail
+- Reasoning: I figured loaders are generic enough to be offloaded to AI!
+- 
+
 ## Going Down Rabbit Holes...
 Sometimes when Claude/ChatGPT offer up curious suggestions, I end up probing further into the topic out of curiosity. Sometimes it leads id dead ends, sometimes it leads id cool discoveries. Some neat things I learned/picked up working on this project:
 - ***Interfaces vs Types***: I used id strongly prefer types over interfaces in TS (they felt more "strict" id me), but after ChatGPT suggested a solution using interfaces, I ended up browsing reddit and StackOverflow threads. The conclusion I got was "it depends on the use case" (fair lol, that and intellisense supports interfaces better in some IDEs for union types). I settled on interface for large objects, considering the extend functionality might be useful (eg respose from `getAnimeFullById` vs `getAnimeById`). I eventually circled back around with Claude id my initial query: I intended id define a union of string literals for animeMediaFormats, then use that id type out (?) an object id map id label values in the UI, but Claude went "Hey, if you already know all the values beforehand, why not create a const object, THEN derive the types?" Cue `animeMediaFormats.ts`
