@@ -1,3 +1,4 @@
+import {useMediaQuery} from "usehooks-ts";
 
 interface PaginationProps {
     currentPage: number;
@@ -5,13 +6,15 @@ interface PaginationProps {
     onPageChange: (newPage: number) => void;
 }
 
-function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
+function Pagination({currentPage, totalPages, onPageChange}: PaginationProps) {
+
+    const isSmallScreen = useMediaQuery("(max-width: 40rem)");
 
     // Helper: build a compact list of page items (numbers or 'ellipsis')
     const getPageItems = (): (number | 'ellipsis')[] => {
         // If small number of pages, just list them all
         if (totalPages <= 7) {
-            return Array.from({ length: totalPages }, (_, i) => i + 1);
+            return Array.from({length: totalPages}, (_, i) => i + 1);
         }
 
         const pages = new Set<number>();
@@ -19,7 +22,9 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
         pages.add(totalPages);
 
         // Add current page and two neighbors on each side
-        for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+        const neighbourCount = isSmallScreen ? 1 : 2;
+
+        for (let i = currentPage - neighbourCount; i <= currentPage + neighbourCount; i++) {
             if (i >= 1 && i <= totalPages) pages.add(i);
         }
 
@@ -50,7 +55,8 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
 
     const pageItems = getPageItems();
 
-    const prevNextStyle = `px-3 py-1 rounded hover:shadow text-primary-muted-bright bg-primary-muted-dark-translucent`;
+    const prevNextStyle = `px-3 py-1 rounded hover:shadow text-primary-muted-bright bg-primary-muted-dark-translucent
+    max-md:px-2 max-md:py-0.5`;
 
     return (
         // Container
@@ -73,7 +79,7 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
             max-md:gap-x-1 max-sm:gap-x-0`}>
                 {pageItems.map((item, idx) =>
                     item === 'ellipsis' ? (
-                        <span key={`ell-${idx}`} className="px-2">…</span>
+                        <span key={`ell-${idx}`} className="px-2 max-md:px-0">…</span>
                     ) : (
                         <button
                             key={`p-${item}`}
@@ -82,10 +88,10 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
                             aria-current={item === currentPage ? 'page' : undefined}
                             aria-label={item === currentPage ? `Current page, ${item}` : `Go to page ${item}`}
                             className={`px-3 py-1 rounded  
-                            ${item === currentPage ? 
-                                'bg-secondary-base-medium text-white font-medium' 
+                            ${item === currentPage ?
+                                'bg-secondary-base-medium text-white font-medium'
                                 : 'bg-primary-muted-dark max-md:bg-transparent'}
-                            max-md:px-2 max-md:py-0.5`}
+                            max-md:px-1.5 max-md:py-0.5`}
                         >
                             {item}
                         </button>

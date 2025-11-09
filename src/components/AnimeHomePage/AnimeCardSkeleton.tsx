@@ -17,7 +17,7 @@ function AnimeCardSkeleton() {
                 <div className={`pb-2 h-5 w-3/4 bg-primary-muted-standard-translucent rounded animate-pulse max-md:h-4 max-md:w-4/5`} />
                 <div className="flex flex-wrap justify-between items-center text-xs font-semibold">
                     <div className="flex items-center gap-1">
-                        <div className="w-3 h-3 bg-primary-muted-standard-translucent rounded animate-pulse max-md:w-2 max-md:h-2" />
+                        <div className="w-3 h-3 bg-primary-muted-standard-translucent rounded animate-pulse max-md:hidden" />
                         <div className="w-6 h-3 bg-primary-muted-standard-translucent rounded animate-pulse" />
                     </div>
                     <div className="w-20 h-3 bg-primary-muted-standard-translucent rounded animate-pulse" />

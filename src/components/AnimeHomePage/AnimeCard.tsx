@@ -19,7 +19,8 @@ export function AnimeCard({id, title, imageUrl, score, mediaFormat, airDateStrin
 
     return (
         <Link to={`/anime/${id}`} className={`anime-card group overflow-hidden hover:scale-[1.04] active:scale-[0.98] transition-transform duration-100 ease-in-out`}>
-            <div className={`anime-card-rating-container flex justify-center items-center`}>
+            <div className={`anime-card-rating-container flex justify-center items-center
+            text-sm font-[Nunito] font-bold text-accent-base-bright mt-[2px] max-md:text-xs`}>
                 {
                     score === null ?
                         <p>N/A</p>
@@ -27,14 +28,15 @@ export function AnimeCard({id, title, imageUrl, score, mediaFormat, airDateStrin
                         <>
                             <StarIcon className={`inline w-3 h-3 mr-1 text-secondary-base-standard
                             max-md:w-2 max-md:h-2`} fill={"currentColor"}/>
-                            <span className={`text-sm font-[Nunito] font-bold text-accent-base-bright mt-[2px] max-md:text-xs`}>{score}</span>
+                            <span className={``}>{score}</span>
                         </>
                 }
             </div>
             <img src={imageUrl ?? placeholderImage} alt={title}
                  loading="lazy"
                  className={`anime-card-image object-cover aspect-3/4 w-full transform transition-transform duration-200 ease-in-out group-hover:scale-[1.05]`} />
-            <div className={`relative flex flex-col gap-1 p-2  text-sm font-bold bg-primary-muted-dark`}>
+            <div className={`relative flex flex-col gap-1 p-2 text-sm font-bold bg-primary-muted-dark
+            max-md:p-1`}>
                 <h3
                     className={
                         `h-[2lh] overflow-hidden whitespace-normal text-primary-muted-bright
@@ -46,7 +48,7 @@ export function AnimeCard({id, title, imageUrl, score, mediaFormat, airDateStrin
                 </h3>
                 <div className={`flex flex-wrap justify-between items-center text-xs font-semibold`}>
                     <div className={`flex items-center gap-1`}>
-                        <CalendarIcon className={`inline w-3 h-3 text-accent-muted-standard`} />
+                        <CalendarIcon className={`inline w-3 h-3 text-accent-muted-standard max-md:hidden`} />
                         <p className={`italic`}>{airDateYear}</p>
                     </div>
                     <p><span>{mediaFormat}</span> {!(episodeCount === null) && `| ${episodeCount}EP`}</p>
