@@ -11,6 +11,7 @@ function App() {
         <Routes>
             <Route path="/" element={<AnimeHomePage />} />
             <Route path="/anime/:animeId" element={<AnimeDetailsPage />} />
+            <Route path="/404-not-found" element={<NotFoundPage/>} />
             <Route path="*" element={<NotFoundPage/>} />
         </Routes>
     )

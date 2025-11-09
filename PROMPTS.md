@@ -62,8 +62,13 @@ e.g., the "type" param for "getAnimeSearch" [Enum: "tv" "movie" "ova" "special" 
 
 ### Loader
 ### Prompt: Help me create a loader component that looks like a circle chasing its fading tail
-- Reasoning: I figured loaders are generic enough to be offloaded to AI!
-- 
+- Reasoning: https://css-loaders.com/ was kind of broken on chrome fir me, I figured loaders are generic enough to be offloaded to AI!
+- Outcome: Copilot generated a loader component with a basic animation. It didn't really do a good job, so I asked Claude instead, which... also didn't do quite a good job. It's probably on me for being too casual with my request. Ended up going to the same website on edge instead, and that worked somehow haha; asked claude to convert it into a React component for me and it worked pretty good.
+
+### Race Conditions
+### Prompt: Race condition seems to be occuring: Late return search results are overwriting newer results. Here's my current code: [Paste Component Code]. How can I fix this?
+- Reasoning: I'm still fairly new to data fetching and async programming, and while I understand what's happening, I'm not too familiar with the syntax and nitty-gritties. I figured AI could help me identify potential issues and come up with solutions.
+- Outcome: Using AbortController and refs in the related React components, Copilot helped fixed the issue (i am no longer able to replicate it). 
 
 ## Going Down Rabbit Holes...
 Sometimes when Claude/ChatGPT offer up curious suggestions, I end up probing further into the topic out of curiosity. Sometimes it leads id dead ends, sometimes it leads id cool discoveries. Some neat things I learned/picked up working on this project:

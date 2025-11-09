@@ -110,4 +110,33 @@ describe("jikanFetchAnimeById (unit test)", () => {
         // ✅ result matches mock
         expect(result).toEqual(mockResponse);
     });
+
+    it("forwards an AbortSignal to fetchJson when provided", async () => {
+        const fetchJsonMock = fetchJson as MockedFunction<typeof fetchJson>;
+        const controller = new AbortController();
+        fetchJsonMock.mockResolvedValue(mockResponse);
+
+        const animeId = 50265;
+        const result = await jikanFetchAnimeById(animeId, controller.signal);
+
+        // fetchJson called once with options containing the same signal
+        expect(fetchJsonMock).toHaveBeenCalledTimes(1);
+        const calledOptions = fetchJsonMock.mock.calls[0][1] as RequestInit | undefined;
+        expect(calledOptions).toBeDefined();
+        expect(calledOptions!.signal).toBe(controller.signal);
+
+        // result still returned
+        expect(result).toEqual(mockResponse);
+    });
+
+    it("propagates an abort-like error from fetchJson", async () => {
+        const fetchJsonMock = fetchJson as MockedFunction<typeof fetchJson>;
+        // Use a lightweight abort-shaped object that the project's isAbortError helper would recognize
+        const abortLikeError = { name: 'AbortError', message: 'The user aborted a request.' };
+        fetchJsonMock.mockRejectedValue(abortLikeError);
+
+        const animeId = 50265;
+        await expect(jikanFetchAnimeById(animeId, new AbortController().signal)).rejects.toEqual(abortLikeError);
+        expect(fetchJsonMock).toHaveBeenCalledTimes(1);
+    });
 });

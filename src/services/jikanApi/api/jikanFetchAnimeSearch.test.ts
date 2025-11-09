@@ -4,6 +4,7 @@ import type {JikanAnimeSearchResponseInterface} from "@/services/jikanApi/api/ji
 import {fetchJson} from "@/services/_shared/fetchJson.ts";
 import {BASE_JIKAN_API_URL} from "@/services/jikanApi/api/jikanApiConfig.ts";
 
+
 describe("buildJikanAnimeSearchUrl", () => {
     it("builds URL with all params correctly", () => {
         const params = {q: "Sleepy Princess", page: 2, limit: 10};
@@ -426,5 +427,35 @@ describe("jikanFetchAnimeSearch (unit)", () => {
 
         // Assert
         await expect(jikanFetchAnimeSearch(params)).rejects.toThrow("Network error");
+    });
+
+    it("forwards an AbortSignal to fetchJson when provided", async () => {
+        const fetchJsonMock = fetchJson as MockedFunction<typeof fetchJson>;
+        const controller = new AbortController();
+        fetchJsonMock.mockResolvedValue(mockResponse);
+
+        // jikanFetchAnimeSearch expects a params object as the first argument
+        const params = { q: "Spy X Family", page: 1 };
+        const result = await jikanFetchAnimeSearch(params, controller.signal);
+
+        // fetchJson called once with options containing the same signal
+        expect(fetchJsonMock).toHaveBeenCalledTimes(1);
+        const calledOptions = fetchJsonMock.mock.calls[0][1] as RequestInit | undefined;
+        expect(calledOptions).toBeDefined();
+        expect(calledOptions!.signal).toBe(controller.signal);
+
+        // result still returned
+        expect(result).toEqual(mockResponse);
+    });
+
+    it("propagates an abort-like error from fetchJson", async () => {
+        const fetchJsonMock = fetchJson as MockedFunction<typeof fetchJson>;
+        // Use a lightweight abort-shaped object that the project's isAbortError helper would recognize
+        const abortLikeError = { name: 'AbortError', message: 'The user aborted a request.' };
+        fetchJsonMock.mockRejectedValue(abortLikeError);
+
+        const params = { q: "Spy X Family" };
+        await expect(jikanFetchAnimeSearch(params, new AbortController().signal)).rejects.toEqual(abortLikeError);
+        expect(fetchJsonMock).toHaveBeenCalledTimes(1);
     });
 });

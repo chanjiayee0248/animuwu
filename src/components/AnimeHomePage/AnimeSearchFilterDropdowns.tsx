@@ -48,7 +48,7 @@ function AnimeSearchFilterDropdowns() {
                 paramValue={sortCategory}
                 displayValueToParamObject={ANIME_SORT_CATEGORY_DISPLAY_VALUE_TO_PARAM_OBJECT}
                 onParamChange={(paramValue) => dispatch(animeSearchActions.setSortCategory(paramValue))}
-                showOnlyParams={["title","episodes","start_date", "end_date", "score", "rank", "popularity"]}
+                showOnlyParams={["title","episodes","start_date", "end_date", "score", "rank", "popularity", "members", "favorites"]}
             />
             <FilterDropdown
                 label="Direction"

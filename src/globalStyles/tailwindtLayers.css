@@ -5,6 +5,10 @@
         cursor: pointer;
     }
 
+    body {
+        color: var(--color-primary-muted-standard);
+    }
+
 }
 
 @layer components {

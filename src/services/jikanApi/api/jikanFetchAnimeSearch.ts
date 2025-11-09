@@ -41,10 +41,10 @@ export function buildJikanAnimeSearchUrl(params: JikanApiSearchParamsInterface):
     return url.toString();
 }
 
-export async function jikanFetchAnimeSearch(params: JikanApiSearchParamsInterface): Promise<JikanAnimeSearchResponseInterface> {
+export async function jikanFetchAnimeSearch(params: JikanApiSearchParamsInterface, signal?: AbortSignal): Promise<JikanAnimeSearchResponseInterface> {
     if (params.limit !== undefined && params.limit < 1) {
         throw new Error("Limit must be at least 1");
     }
     const url = buildJikanAnimeSearchUrl(params);
-    return fetchJson<JikanAnimeSearchResponseInterface>(url);
+    return fetchJson<JikanAnimeSearchResponseInterface>(url, signal ? { signal } : undefined);
 }

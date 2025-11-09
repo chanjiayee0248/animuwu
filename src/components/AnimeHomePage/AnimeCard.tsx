@@ -42,7 +42,7 @@ export function AnimeCard({id, title, imageUrl, score, mediaFormat, airDateStrin
                 >
                     {title}
                 </h3>
-                <div className={`flex justify-between items-center text-xs font-semibold text-primary-muted-standard`}>
+                <div className={`flex justify-between items-center text-xs font-semibold`}>
                     <div className={`flex items-center gap-1`}>
                         <CalendarIcon className={`inline w-3 h-3 text-accent-muted-standard`} />
                         <p>{airDateYear}</p>
