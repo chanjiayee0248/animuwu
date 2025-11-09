@@ -7,7 +7,8 @@ function AnimeSearchBar() {
     const dispatch = useAppDispatch();
     return (
         <div className={`w-full max-w-[800px] flex items-center gap-2 px-3 py-2 bg-primary-base-medium text-white rounded-3xl
-        border-2 border-transparent focus-within:border-accent-base-bright-translucent transition-border duration-200`}>
+        border-2 border-transparent focus-within:border-accent-base-bright-translucent transition-border duration-200
+        max-xl:px-2 max-xl:py-1`}>
             <label htmlFor="anime-search-bar-input">
                 <SearchIcon color={"white"} width={"1rem"}/>
             </label>

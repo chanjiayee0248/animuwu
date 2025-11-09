@@ -24,18 +24,22 @@ function AnimeHomePage() {
 
 
     return (
-        <div className={`flex flex-col items-center w-full p-2`}>
+        <div className={`flex flex-col items-center w-full p-[2%]`}>
             <header className={`flex flex-col items-center w-full pt-10 py-8 gap-1`}>
-                <h1 className={`text-6xl font-semibold font-[Nunito] text-center text-primary-base-bright`}>
+                <h1 className={`text-6xl font-semibold font-[Nunito] text-center text-primary-base-bright
+                max-lg:text-5xl max-sm:text-3xl`}>
                     Anim<span className={`font-bold font-[Playpen_Sans] text-secondary-vivid-bright`}>UwU</span>
                 </h1>
-                <h2 className={`text-xl font-semibold font-[Nunito] italic text-center text-accent-muted-standard`}>
+                <h2 className={`text-xl font-semibold font-[Nunito] italic text-center text-accent-muted-standard
+                max-lg:text-lg max-sm:text-sm`}>
                     ~ Your Friendly Anime Search Pal ~
                 </h2>
             </header>
             <section className={`flex flex-col gap-12 items-center w-full`}>
                 <div className={`flex flex-col gap-6 items-center w-full`}>
-                    <AnimeSearchBar/>
+                    <div className={`w-full flex justify-center px-8`}>
+                        <AnimeSearchBar/>
+                    </div>
                     <AnimeSearchFilterDropdowns/>
                 </div>
                 <AnimeCardGrid animeData={animeData} animeSearchIsLoading={animeSearchIsLoading} animeSearchError={animeSearchError} />

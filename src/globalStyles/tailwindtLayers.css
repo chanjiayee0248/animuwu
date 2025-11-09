@@ -19,6 +19,8 @@
         box-shadow: var(--shadow-xl);
         width: 240px;
         overflow: hidden;
+
+        @apply max-lg:w-[200px] max-md:w-[140px]
     }
 
 
@@ -36,5 +38,9 @@
         border-radius: var(--radius-2xl);
         z-index: 1;
         background-color: var(--color-primary-base-dark);
+
+        @apply max-md:min-w-[3rem]
+
+
     }
 }

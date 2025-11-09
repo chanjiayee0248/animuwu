@@ -17,10 +17,9 @@ function AnimeSearchFilterDropdowns() {
     const sortDirection = useAppSelector((state) => state.animeSearch.sortDirection);
 
 
-
     return (
-        <div className={`flex flex-wrap gap-4 w-full justify-center`}>
-
+        <div className={`flex flex-wrap gap-4 w-full justify-center
+            max-2xl:gap-3 max-md:gap-2 max-sm:gap-1`}>
 
             <FilterDropdown
                 label="Airing Status"
@@ -45,7 +44,7 @@ function AnimeSearchFilterDropdowns() {
                 paramValue={sortCategory}
                 displayValueToParamObject={ANIME_SORT_CATEGORY_DISPLAY_VALUE_TO_PARAM_OBJECT}
                 onParamChange={(paramValue) => dispatch(animeSearchActions.setSortCategory(paramValue))}
-                showOnlyParams={["episodes","start_date", "end_date", "score", "rank", "popularity", "members", "favorites"]}
+                showOnlyParams={["episodes", "start_date", "end_date", "score", "rank", "popularity", "members", "favorites"]}
             />
             <FilterDropdown
                 label="Direction"

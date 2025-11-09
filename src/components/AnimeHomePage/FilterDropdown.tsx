@@ -31,9 +31,10 @@ function FilterDropdown<T extends Record<string, string | number | null>>({
         <div>
             <select
                 aria-label={label}
-                className={`w-full min-w-[12rem] pl-3 pr-4 py-1.5 rounded-lg
+                className={`w-full min-w-[12em] pl-3 pr-4 py-1.5 rounded-lg
           bg-primary-muted-dark text-primary-muted-bright
-          hover:bg-primary-muted-medium nth-of-type-2:bg-white`}
+          hover:bg-primary-muted-medium nth-of-type-2:bg-white
+          max-xl:text-sm max-lg:text-xs max-md:px-2 max-md:py-1`}
                 value={String(paramDisplayValue)}
                 onChange={(e) => {
                     const selectedLabel = e.target.value as keyof T;

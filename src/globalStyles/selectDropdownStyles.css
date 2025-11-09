@@ -1,10 +1,17 @@
-select,
-::picker(select) {
-    appearance: base-select;
-}
+/* selectDropdownStyles.css - normalize experimental pseudo-elements used for enhanced native selects
+   Note: contains non-standard pseudo-elements `::picker` and `::checkmark`.
+   We disable stylelint for this file so linters won't flag them. */
+/* stylelint-disable */
 
-option::checkmark {
-    order: 1;
-    margin-left: auto;
-    content: "✦";
+@media (pointer: fine) {
+    select,
+    ::picker(select) {
+        appearance: base-select;
+    }
+
+    option::checkmark {
+        order: 1;
+        margin-left: auto;
+        content: "✦";
+    }
 }

@@ -27,7 +27,8 @@ function AnimeCardGrid({animeData, animeSearchIsLoading, animeSearchError}: Anim
     // Otherwise render the grid wrapper with loading skeletons, error, or results
     return (
         <div
-            className="w-full max-w-[1300px] grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-x-2 gap-y-6 justify-items-center">
+            className={`w-full max-w-[1300px] grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-x-2 gap-y-6 justify-items-center
+            max-lg:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] max-md:grid-cols-[repeat(auto-fit,minmax(140px,1fr))]`}>
             {animeSearchIsLoading ? (
                 // Loading skeletons
                 Array.from({length: 25}).map((_, index) => (

@@ -54,7 +54,7 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
 
     return (
         // Container
-        <nav aria-label="Pagination" className="flex items-center space-x-2">
+        <nav aria-label="Pagination" className="flex flex-wrap items-center space-x-2 max-md:text-xs">
 
             <button
                 type="button"
@@ -63,11 +63,14 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
                 aria-label="Go to previous page"
                 className={`${prevNextStyle} ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-primary-muted-medium-translucent'}`}
             >
-                {"< Prev"}
+                <span>{"< "}</span>
+                <span className={`max-md:hidden`}>Prev</span>
+
             </button>
 
             {/* Page number buttons / ellipses */}
-            <div className="flex items-center space-x-1 text-primary-base-standard ">
+            <div className={`flex items-center text-primary-base-standard gap-x-2
+            max-md:gap-x-1 max-sm:gap-x-0`}>
                 {pageItems.map((item, idx) =>
                     item === 'ellipsis' ? (
                         <span key={`ell-${idx}`} className="px-2">…</span>
@@ -79,7 +82,10 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
                             aria-current={item === currentPage ? 'page' : undefined}
                             aria-label={item === currentPage ? `Current page, ${item}` : `Go to page ${item}`}
                             className={`px-3 py-1 rounded  
-                            ${item === currentPage ? 'bg-secondary-base-medium text-white font-medium' : 'bg-primary-muted-dark'}`}
+                            ${item === currentPage ? 
+                                'bg-secondary-base-medium text-white font-medium' 
+                                : 'bg-primary-muted-dark max-md:bg-transparent'}
+                            max-md:px-2 max-md:py-0.5`}
                         >
                             {item}
                         </button>
@@ -94,7 +100,8 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
                 aria-label="Go to next page"
                 className={`${prevNextStyle} ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-primary-muted-medium'}`}
             >
-                {"Next >"}
+                <span className={`max-md:hidden`}>Next</span>
+                <span>{" >"}</span>
             </button>
 
         </nav>
