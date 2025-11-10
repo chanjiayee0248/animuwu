@@ -57,7 +57,7 @@ function AnimeSearchFilterDropdowns() {
                 onClick={() => dispatch(animeSearchActions.resetFilters())}
                 className={`w-8 h-8 rounded-full bg-primary-muted-medium text-primary-muted-bright
                 hover:brightness-130 hover:scale-110 active:brightness-80 active:scale-90 transition-filter duration-100
-                max-lg:p-1  max-md:w-6 max-md:h-6 max-md:p-[2px]`}
+                p-1  max-md:w-6 max-md:h-6 max-md:p-[2px]`}
                 aria-label={"Reset Filters"}
             >
                 <RefreshCcwIcon className="w-full h-full p-0.5 hover:-rotate-100 transition-rotate duration-200" strokeWidth={2} />
