@@ -27,19 +27,29 @@ Clean TypeScript types and modular code.
 
 ### Quick start:
 1. Clone the repo: 
-```git clone https://github.com/chanjiayee0248/animuwu.git```
+```
+git clone https://github.com/chanjiayee0248/animuwu.git
+```
 
 2. Navigate to the project directory:
-```cd animuwu```
+```
+cd animuwu
+```
 
 3. Install dependencies:
-```npm install```
+```
+npm install
+```
 
 4. Start the development server:
-```npm run dev```
+```
+npm run dev
+```
 
 5. Open your browser and go to: 
-```http://localhost:4000```
+```
+http://localhost:4000
+```
 
 ### Usage:
 - Use the search bar on the homepage to look up anime titles.
@@ -61,5 +71,11 @@ Clean TypeScript types and modular code.
 - Error handling for API requests with user-friendly messages
 - Race condition handling via AbortControllers
 - Basic unit and integration tests with vitest for API-related functions
-  - To run unit tests: ```npm run test:unit```
-  - To run integration tests (rate-limited with delays): ```npm run test:integration```
+  - To run unit tests: 
+  ```
+  npm run test:unit
+  ```
+  - To run integration tests (rate-limited with delays): 
+  ```
+  npm run test:integration
+  ```
