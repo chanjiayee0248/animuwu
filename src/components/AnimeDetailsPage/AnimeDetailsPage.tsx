@@ -59,6 +59,7 @@ function AnimeDetailsPage() {
 
             <div className="flex justify-center w-full p-4">
                 <div className={`grid grid-cols-[250px_1fr] max-w-[1100px] w-full rounded-2xl overflow-hidden
+                 shadow-[0_0_4px_var(--color-primary-vivid-standard-translucent)]
                 max-md:grid-cols-1`}>
                     <AnimeStats
                         score={data.score}
