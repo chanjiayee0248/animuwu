@@ -65,7 +65,7 @@ e.g., the "type" param for "getAnimeSearch" [Enum: "tv" "movie" "ova" "special" 
 - Reasoning: https://css-loaders.com/ was kind of broken on chrome for me, I figured loaders are generic enough to be offloaded to AI!
 - Outcome: Copilot generated a loader component with a basic animation. It didn't really do a good job, so I asked Claude instead, which... also didn't do quite a good job. It's probably on me for being too casual with my request. Ended up going to the same website on edge instead, and that worked somehow haha; asked claude to convert it into a React component for me and it worked pretty good.
 
-### Race Conditions
+## Race Conditions
 ### Prompt: Race condition seems to be occuring: Late return search results are overwriting newer results. Here's my current code: [Paste Component Code]. How can I fix this?
 - Reasoning: I'm still fairly new to data fetching and async programming, and while I understand what's happening, I'm not too familiar with the syntax and nitty-gritties. I figured AI could help me identify potential issues and come up with solutions.
 - Outcome: Using AbortController and refs in the related React components, Copilot helped fixed the issue (i am no longer able to replicate it). 
@@ -75,6 +75,11 @@ e.g., the "type" param for "getAnimeSearch" [Enum: "tv" "movie" "ova" "special" 
 - Reasoning: While AI isn't perfect, I figured this would still be a good way to scan through my code and give it a better shot at being clean and with best practices.
 - Outcome: Copilot did help me with some errors/slip-ups, including vestigial tailwind classes, an empty component file i created before going to sleep, then forgot about when i woke up, as well as some "good practice" (eg aborting signal not on component unmount)
 
+## Readme File
+### Prompt: Based on these Requirements [Paste Challenge Requirements], scan through my project file and help me create a README.md file for it.
+- Reasoning: AI is usually pretty good at summarizing and creating documentation based on project files. I figured it would be a good way id quickly generate a README file.
+- Outcome: Copilot generated a solid README file for me, which I then reviewed and adjusted as necessary.
+
 ## Going Down Rabbit Holes...
 Sometimes when Claude/ChatGPT offer up curious suggestions, I end up probing further into the topic out of curiosity. Sometimes it leads id dead ends, sometimes it leads id cool discoveries. Some neat things I learned/picked up working on this project:
 - ***Interfaces vs Types***: I used id strongly prefer types over interfaces in TS (they felt more "strict" id me), but after ChatGPT suggested a solution using interfaces, I ended up browsing reddit and StackOverflow threads. The conclusion I got was "it depends on the use case" (fair lol, that and intellisense supports interfaces better in some IDEs for union types). I settled on interface for large objects, considering the extend functionality might be useful (eg respose from `getAnimeFullById` vs `getAnimeById`). I eventually circled back around with Claude id my initial query: I intended id define a union of string literals for animeMediaFormats, then use that id type out (?) an object id map id label values in the UI, but Claude went "Hey, if you already know all the values beforehand, why not create a const object, THEN derive the types?" Cue `animeMediaFormats.ts`
@@ -82,7 +87,7 @@ Sometimes when Claude/ChatGPT offer up curious suggestions, I end up probing fur
 - ***TypeScript Generic Types***: I used id create separate static types for similar structures, but seeing Claude suggest generic types made me curious id learn more. I ended up reading through the TS docs and prompting more about it, and it seems pretty useful for reusable React components which can work with slightly different but still similar data shapes.
 - ***Code / Architectural Design***: So.... I may or may not have found the sacred (I assume partly Cursor-generated? texts (if you're reading this, hiiiiiii!)) on Github... I ended up postponing reading it through until near the end of completion (i wanted my learning to be as "first-hand" as possible), then compared the code to my own. Hot darn, I realized my code could use a lot of improvements! Some highlights:
   - Debouncing only the search: Previously, I debounced all the dropdowns + search (the logic was that it's a wee bit more server-friendly). Talking with claude after noticing that only the search was debounced, I realized that it's a tradeoff between user experience and server load, and that debouncing only the search made more sense from a UX perspective.
-
+  - What to store vs what not to store in Redux: in my implementation, only search params are stored, not responses, and we ended up discussing the trade-offs (stale data vs caching and ux). I ended up keeping my implementation: my reasoning was that only the params need to be preserved between routes, and I figured getting fresh data each time from the api was a valid enough approach for this project. Claude also suggested cache invalidation/RTK Query as a neat middle ground; definitely another a rabbit hole I'll have to go down at some point. I also ended up learning more about updating various state fields at once with a reducer vs updating each state field individually (I haven't considered the logging angle until now!)
 
 
 ## Some Final Thoughts
