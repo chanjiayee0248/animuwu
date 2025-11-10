@@ -60,7 +60,7 @@ function Pagination({currentPage, totalPages, onPageChange}: PaginationProps) {
 
     return (
         // Container
-        <nav aria-label="Pagination" className="flex flex-wrap items-center space-x-2 max-md:text-xs">
+        <nav aria-label="Pagination" className="flex flex-wrap items-center space-x-2 max-md:text-sm max-sm:text-xs">
 
             <button
                 type="button"

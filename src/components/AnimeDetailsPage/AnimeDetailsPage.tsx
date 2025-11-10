@@ -41,7 +41,7 @@ function AnimeDetailsPage() {
     const genreNames = Array.isArray(data.genres) ? data.genres.map(g => g.name) : [];
 
     return (
-        <div className="w-full min-h-dvh flex flex-col items-center gap-8">
+        <div className={`w-full min-h-dvh flex flex-col items-center gap-8 max-md:gap-2`}>
             <AnimeMainDetails
                 englishTitle={getPreferredJikanAnimeTitle(data.titles, "english")}
                 defaultTitle={getPreferredJikanAnimeTitle(data.titles, "default")}
@@ -58,7 +58,8 @@ function AnimeDetailsPage() {
             />
 
             <div className="flex justify-center w-full p-4">
-                <div className="grid grid-cols-[250px_1fr] max-w-[1100px] w-full rounded-2xl overflow-hidden">
+                <div className={`grid grid-cols-[250px_1fr] max-w-[1100px] w-full rounded-2xl overflow-hidden
+                max-md:grid-cols-1`}>
                     <AnimeStats
                         score={data.score}
                         scoredBy={data.scored_by}

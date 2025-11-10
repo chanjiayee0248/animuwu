@@ -17,6 +17,9 @@ export function AnimeExtendedDetails({
                                          studios
                                      }: AnimeExtendedDetailsProps) {
 
+    const AnimeDetailParagraphsSharedStyles = `whitespace-pre-line text-primary-greyed-bright leading-snug
+    max-md:text-sm`;
+
 
     return (
         <div className={`w-full h-full flex flex-col gap-16 p-[5%] bg-primary-muted-dark`}>
@@ -27,7 +30,7 @@ export function AnimeExtendedDetails({
             {
                 synopsis &&
                 <AnimeExtendedDetailsHeaderContainer headerText={"Synopsis"}>
-                    <p className={`whitespace-pre-line text-justify text-primary-greyed-bright leading-snug`}>
+                    <p className={`${AnimeDetailParagraphsSharedStyles}`}>
                         {synopsis}
                     </p>
                 </AnimeExtendedDetailsHeaderContainer>
@@ -35,7 +38,7 @@ export function AnimeExtendedDetails({
             {
                 background &&
                 <AnimeExtendedDetailsHeaderContainer headerText={"Background"}>
-                    <p className={`whitespace-pre-line text-justify text-primary-greyed-bright leading-snug`}>
+                    <p className={`${AnimeDetailParagraphsSharedStyles}`}>
                         {background}
                     </p>
                 </AnimeExtendedDetailsHeaderContainer>
