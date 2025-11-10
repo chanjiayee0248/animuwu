@@ -4,6 +4,7 @@ import { animeSearchActions } from "@/store/animeSearchSlice.ts";
 import { jikanFetchAnimeSearch } from "@/services/jikanApi/api/jikanFetchAnimeSearch.ts";
 import type { JikanAnimeSearchResponseInterface } from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
 import { isAbortError } from "@/services/_shared/isAbortError.ts";
+import { useDebounce} from "@/hooks/useDebounce.tsx";
 
 interface UseAnimeSearchReturn {
     animeData: JikanAnimeSearchResponseInterface | null;
@@ -12,10 +13,9 @@ interface UseAnimeSearchReturn {
     currentPage: number;
 }
 
-export function useAnimeSearch():UseAnimeSearchReturn  {
+export function useAnimeSearch(): UseAnimeSearchReturn {
     const dispatch = useAppDispatch();
 
-    // Get all search parameters from the store
     const {
         searchQuery,
         airingStatus,
@@ -26,13 +26,9 @@ export function useAnimeSearch():UseAnimeSearchReturn  {
         currentPage,
         animeSearchIsLoading,
         animeSearchError
-    } = useAppSelector((state) => state.animeSearch);
+    } = useAppSelector(state => state.animeSearch);
 
-    // Local state to store the fetched anime data
     const [animeData, setAnimeData] = useState<JikanAnimeSearchResponseInterface | null>(null);
-
-    // Ref to track debounce timeout
-    const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     // Track the latest request id to prevent race conditions
     const latestRequestIdRef = useRef(0);
@@ -40,7 +36,10 @@ export function useAnimeSearch():UseAnimeSearchReturn  {
     // Keep a ref to the active AbortController so we can cancel previous requests
     const activeAbortControllerRef = useRef<AbortController | null>(null);
 
-    // Preserve parameters to detect changes
+    // Debounce only the search query
+    const debouncedSearchQuery = useDebounce(searchQuery, 250);
+
+    // Reset to first page if any search parameters change
     const prevParamsRef = useRef({
         searchQuery,
         airingStatus,
@@ -50,22 +49,20 @@ export function useAnimeSearch():UseAnimeSearchReturn  {
         sortDirection
     });
 
-    // Reset to first page when search parameters change (not on mount)
     useEffect(() => {
-        const prevParams = prevParamsRef.current;
+        const prev = prevParamsRef.current;
         const paramsChanged =
-            prevParams.searchQuery !== searchQuery ||
-            prevParams.airingStatus !== airingStatus ||
-            prevParams.audienceRating !== audienceRating ||
-            prevParams.mediaFormat !== mediaFormat ||
-            prevParams.sortCategory !== sortCategory ||
-            prevParams.sortDirection !== sortDirection;
+            prev.searchQuery !== searchQuery ||
+            prev.airingStatus !== airingStatus ||
+            prev.audienceRating !== audienceRating ||
+            prev.mediaFormat !== mediaFormat ||
+            prev.sortCategory !== sortCategory ||
+            prev.sortDirection !== sortDirection;
 
         if (paramsChanged) {
             dispatch(animeSearchActions.setCurrentPage(1));
         }
 
-        // Update ref with current values
         prevParamsRef.current = {
             searchQuery,
             airingStatus,
@@ -76,40 +73,25 @@ export function useAnimeSearch():UseAnimeSearchReturn  {
         };
     }, [searchQuery, airingStatus, audienceRating, mediaFormat, sortCategory, sortDirection, dispatch]);
 
-    // Fetch anime data with debouncing and request cancellation
+    // Fetch anime data
     useEffect(() => {
-        // Clear existing timeout on param change
-        if (debounceTimeoutRef.current) {
-            clearTimeout(debounceTimeoutRef.current);
+        // Abort previous request if still running
+        if (activeAbortControllerRef.current) {
+            activeAbortControllerRef.current.abort();
         }
 
-        // Set up debounced API call
-        debounceTimeoutRef.current = setTimeout(async () => {
-            // Increment request id and capture it locally
-            const requestId = ++latestRequestIdRef.current;
+        const abortController = new AbortController();
+        activeAbortControllerRef.current = abortController;
 
-            // Abort any in-flight request
-            if (activeAbortControllerRef.current) {
-                try {
-                    activeAbortControllerRef.current.abort();
-                } catch {
-                    // Ignore abort errors
-                }
-                activeAbortControllerRef.current = null;
-            }
+        const requestId = ++latestRequestIdRef.current;
 
-            // Create a new AbortController for this request
-            const abortController = new AbortController();
-            activeAbortControllerRef.current = abortController;
-
+        async function fetchData() {
             try {
-                // Set loading state
                 dispatch(animeSearchActions.setLoading(true));
                 dispatch(animeSearchActions.setError(null));
 
-                // Call the API with the abort signal
                 const response = await jikanFetchAnimeSearch({
-                    q: searchQuery || undefined,
+                    q: debouncedSearchQuery || undefined,
                     page: currentPage,
                     status: airingStatus,
                     rating: audienceRating,
@@ -119,61 +101,52 @@ export function useAnimeSearch():UseAnimeSearchReturn  {
                     limit: 25
                 }, abortController.signal);
 
-                // Ignore stale responses
-                if (requestId !== latestRequestIdRef.current) {
-                    return;
-                }
+                if (requestId !== latestRequestIdRef.current) return;
 
-                // Update local state with the response
                 setAnimeData(response);
-
-                // Clear loading state
                 dispatch(animeSearchActions.setLoading(false));
             } catch (error) {
-                // Handle abort errors
                 if (isAbortError(error)) {
-                    // Clear loading only if this is the latest request
                     if (requestId === latestRequestIdRef.current) {
                         dispatch(animeSearchActions.setLoading(false));
                     }
                     return;
                 }
 
-                // Handle other errors
                 const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-
-                // Only set error if this is the latest request
                 if (requestId === latestRequestIdRef.current) {
                     dispatch(animeSearchActions.setError(errorMessage));
                     dispatch(animeSearchActions.setLoading(false));
                     setAnimeData(null);
                 }
             } finally {
-                // Clear the active controller if it's ours
                 if (activeAbortControllerRef.current === abortController) {
                     activeAbortControllerRef.current = null;
                 }
             }
-        }, 250);
+        }
 
-        // Cleanup function
+        // Voiding this because fetchData returns an undefined promise
+        // fetchData is async because you can't await directly
+        // but data loading/error is already handled in state
+        // so .then and .catch() is not needed
+        void fetchData();
+
         return () => {
-            if (debounceTimeoutRef.current) {
-                clearTimeout(debounceTimeoutRef.current);
-                debounceTimeoutRef.current = null;
-            }
-            // Abort any in-flight request: Client-side cleanup so unmounted components don't receive responses
-            if (activeAbortControllerRef.current) {
-                activeAbortControllerRef.current.abort();
-                activeAbortControllerRef.current = null;
-            }
+            // Abort request on unmount / dependency change
+            abortController.abort();
         };
-    }, [searchQuery, airingStatus, audienceRating, mediaFormat, sortCategory, sortDirection, currentPage, dispatch]);
+    }, [
+        debouncedSearchQuery, // debounced value triggers effect
+        airingStatus,
+        audienceRating,
+        mediaFormat,
+        sortCategory,
+        sortDirection,
+        currentPage,
+        dispatch
+    ]);
 
-    return {
-        animeData,
-        animeSearchIsLoading,
-        animeSearchError,
-        currentPage
-    };
+    return { animeData, animeSearchIsLoading, animeSearchError, currentPage };
 }
+
