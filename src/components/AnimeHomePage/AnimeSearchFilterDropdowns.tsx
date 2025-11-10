@@ -1,3 +1,4 @@
+import {RefreshCcwIcon} from "lucide-react";
 import FilterDropdown from "@/components/AnimeHomePage/FilterDropdown";
 import {useAppDispatch, useAppSelector} from "@/store/hooks";
 import {ANIME_AIRING_STATUS_DISPLAY_VALUE_TO_PARAM_OBJECT} from "@/features/animeSearch/animeAiringStatus";
@@ -18,7 +19,7 @@ function AnimeSearchFilterDropdowns() {
 
 
     return (
-        <div className={`flex flex-wrap gap-4 w-full justify-center
+        <div className={`flex flex-wrap gap-4 w-full justify-center items-center
             max-2xl:gap-3 max-md:gap-2 max-sm:gap-1`}>
 
             <FilterDropdown
@@ -52,12 +53,15 @@ function AnimeSearchFilterDropdowns() {
                 displayValueToParamObject={ANIME_SORT_DIRECTION_DISPLAY_VALUE_TO_PARAM_OBJECT}
                 onParamChange={(paramValue) => dispatch(animeSearchActions.setSortDirection(paramValue))}
             />
-            {/*<button*/}
-            {/*    onClick={() => dispatch(animeSearchActions.resetFilters())}*/}
-            {/*    className="w-full px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"*/}
-            {/*>*/}
-            {/*    Reset Filters*/}
-            {/*</button>*/}
+            <button
+                onClick={() => dispatch(animeSearchActions.resetFilters())}
+                className={`w-8 h-8 rounded-full bg-primary-muted-medium text-primary-muted-bright
+                hover:brightness-130 hover:scale-110 active:brightness-80 active:scale-90 transition-filter duration-100
+                max-lg:p-1  max-md:w-4 max-md:h-4`}
+                aria-label={"Reset Filters"}
+            >
+                <RefreshCcwIcon className="w-full h-full p-0.5 hover:-rotate-100 transition-rotate duration-200" strokeWidth={2} />
+            </button>
         </div>
     )
 }
