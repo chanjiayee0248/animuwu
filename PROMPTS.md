@@ -1,30 +1,31 @@
 # AI/Copilot Usage Disclosure
-Hi! If you're reading this, chances are you're curious about *how* AI tools were used in the creation of this project. I'll try id keep sections organized based on overall sub-objectives, and use a journal-like style since I'd imagine you'd want id peer into my thought processes :D
+Hi! If you're reading this, chances are you're curious about *how* AI tools were used in the creation of this project. I'll try to keep sections organized based on overall sub-objectives, and use a journal-like style since I'd imagine you'd want to peer into my thought processes :D
 
-Extra context/background info: My previous projects have mostly been purely static apps with little id no data fetching, and involved using MobX instead of Redux for state management. This is my first time building an app with a larger focus on data fetching and API integration, and my first time using Redux as well. 
+Extra context/background info: My previous projects have mostly been purely static apps with little to no data fetching, and involved using MobX instead of Redux for state management. This is my first time building an app with a larger focus on data fetching and API integration, and my first time using Redux as well. 
 
 Here goes!
 
 ## AI Tools Used:
 - *GitHub Copilot*: Used primarily for code suggestions and boilerplate generation.
 - *Claude*: Used primarily for brainstorming and debugging.
-- *ChatGPT*: Used primarily when Claude rate limit is hit (lol), when Claude answers appear suboptimal (feel "off") and I want a "second opinion", or when a task is too "simple" id justify using up my Claude quota (e.g. boilerplate, simple refactors).
-- *Google Browser AI*: Does this count? Lol. Sometimes if I'm suspicious a LLM is hallucinating or want id tackle something that's more trouble id prompt than just id Google, I'll do a quick google search on docs or StackOverflow id verify, and occasionally the Browser AI provides pretty good summaries.
+- *ChatGPT*: Used primarily when Claude rate limit is hit (lol), when Claude answers appear suboptimal (feel "off") and I want a "second opinion", or when a task is too "simple" to justify using up my Claude quota (e.g. boilerplate, simple refactors).
+- *Google Browser AI*: Does this count haha? Sometimes if I'm suspicious an LLM is hallucinating or want to tackle something that's more trouble to prompt than just to Google, I'll do a quick google search on docs or StackOverflow to verify, and occasionally the Browser AI provides pretty good summaries.
 
 ## Project Conceptualization
 ### Prompt: *[Paste Entire Project Requirement]*
-- Reasoning: I wanted id get a high-level overview of the project requirements before diving in, and check out what the "average, standardized solution" would be in terms of layout and presentation — just id make sure I'm envisioning more or less the same thing.
-- Outcome: Claude generated a simple homepage with a logo and an anime search bar. Very barebones and search was broken (as expected, since i didn't provide any API details), but it gave me a baseline id work against and some code id look through. Mainly it just helped me feel less intimidated about taking on this coding challenge id begin with. (Never done one before, first times are scary!)
+- Reasoning: I wanted to get a high-level overview of the project requirements before diving in, and check out what the "average, standardized solution" would be in terms of layout and presentation — just to make sure I'm envisioning more or less the same thing.
+- Outcome: Claude generated a simple homepage with a logo and an anime search bar. Very barebones and search was broken (as expected, since i didn't provide any API details), but it gave me a baseline to work against and some code to look through. Mainly it just helped me feel less intimidated about taking on this coding challenge to begin with. (Never done one before, first times are scary!)
+
 ### Prompt: Create a sample single anime page layout, given these fields available: *[Paste Response Sample from Jikan's getAnimeById]*
-- Reasoning: I wanted id get a feel for how id best present the various fields available in the anime details response.
+- Reasoning: I wanted to get a feel for how to best present the various fields available in the anime details response.
 - Outcome: Claude generated a fairly clean base layout with sections for synopsis, stats, genres, studios, and trailer, which I could then further adjust in Figma.
 
 ## General Busywork
 ### Prompt: Convert this *[List of Enum Values]* into a TypeScript Type
-- Reasoning: Sometimes it's nice id offload busywork id AI, helps me focus on higher-level tasks and cuts down on manual-typing typos
+- Reasoning: Sometimes it's nice to offload busywork to AI, helps me focus on higher-level tasks and cuts down on manual-typing typos
 - Outcome: ChatGPT generated the TypeScript code for me, which I then copy-pasted into my codebase.
-- Other Examples of Busywork Offloaded id AI:
-  - Creating labels for params and putting them into an object for easier mapping in the UI (eg mapping "TV Show" id "tv" for the API call)
+- Other Examples of Busywork Offloaded to AI:
+  - Creating labels for params and putting them into an object for easier mapping in the UI (eg mapping "TV Show" to "tv" for the API call)
   - Creating TypeScript interfaces from response schema in the Jikan API docs
 
 ## CSS Theme Variable Names
@@ -35,24 +36,24 @@ Here goes!
 ## Managing Typescript Types
 ### Prompt: *What name id give this TypeScript Type *[Paste Enums]*? 
 e.g., the "type" param for "getAnimeSearch" [Enum: "tv" "movie" "ova" "special" "ona" "music" "cm" "pv" "tv_special"]
-- Reasoning: I like id suffix my types with "Type" id distinguish them from class names, but I'm not about id name this "AnimeTypeType" lol.
-- Outcome: ChatGPT suggested "MediaFormatType", which I then extended id AnimeMediaFormatType (in case we're supporting manga or other media types in the future)
+- Reasoning: I like to suffix my types with "Type" to distinguish them from class names, but I'm not about to name this "AnimeTypeType" lol.
+- Outcome: ChatGPT suggested "MediaFormatType", which I then extended to AnimeMediaFormatType (in case we're supporting manga or other media types in the future)
 
 ## Automated Tests
-### Prompt: [Paste Feature id Test + Relevant Typescript Interfaces]
+### Prompt: [Paste Feature to Test + Relevant Typescript Interfaces]
 ### Full Disclosure: All test code was generated by AI.
-- Reasoning: Previously, I haven't written many automated tests, as my past projects were often creative/iterative in nature and often subject id frequent changes; I reasoned the overhead of maintaining tests was greater than the benefits. However, since this project involved data fetching and state management where requirements are more concrete and less likely id change, I felt it was a good opportunity id start learning vitest. I found AI tools id be helpful in converting my thoughts of "what should be tested" into actual test code.
-- Outcome: Claude and ChatGPT generated test code based on my feature descriptions and relevant typescript interfaces. I reviewed and tested the generated code id the best of my current abilities, debugged and adjusted as necessary, and learned quite a bit!
+- Reasoning: Previously, I haven't written many automated tests, as my past projects were often creative/iterative in nature and often subject to frequent changes; I reasoned the overhead of maintaining tests was greater than the benefits. However, since this project involved data fetching and state management where requirements are more concrete and less likely to change, I felt it was a good opportunity to start learning vitest. I found AI tools to be helpful in converting my thoughts of "what should be tested" into actual test code.
+- Outcome: Claude and ChatGPT generated test code based on my feature descriptions and relevant typescript interfaces. I reviewed and tested the generated code to the best of my current abilities, debugged and adjusted as necessary, and learned quite a bit!
 
 ## Redux
 ### Prompt: [Describe Requirements Using MobX Terms + Paste Relevant Typescript Interfaces] Please help generate a Redux Toolkit Equivalent
-- Reasoning: I'm pretty much completely new id Redux! That being said, I am quite familiar with state management using MobX, and going through a quick Redux tutorial (i.e. Redux Docs and telling ChatGPT id explain concepts id me) made me realize that many concepts are now more similar with the new Redux Toolkit approach (store vs rootstores, slices vs childstores etc). I found it easier id describe what I wanted in MobX terms, and have AI help me translate that into Redux Toolkit code.
-- Outcome: Claude generated fairly accurate Redux Toolkit code based on my MobX-style descriptions. I then reviewed and adjusted the code as necessary id fit my project structure and naming conventions. At some point, I found this id be a really cool learning project for learning Redux (and so many other new things!), so I ended up adding note-like comments just id reinforce learning for myself.
+- Reasoning: I'm pretty much completely new to Redux! That being said, I am quite familiar with state management using MobX, and going through a quick Redux tutorial (i.e. Redux Docs and telling ChatGPT to explain concepts to me) made me realize that many concepts are now more similar with the new Redux Toolkit approach (store vs rootstores, slices vs childstores etc). I found it easier to describe what I wanted in MobX terms, and have AI help me translate that into Redux Toolkit code.
+- Outcome: Claude generated fairly accurate Redux Toolkit code based on my MobX-style descriptions. I then reviewed and adjusted the code as necessary to fit my project structure and naming conventions. At some point, I found this to be a really cool learning project for learning Redux (and so many other new things!), so I ended up adding note-like comments just to reinforce learning for myself.
 
 ## "Big" Components
 ### Prompt: [Describe Component Requirements, Let Github Copilot Handle the First Draft]
-- Example Prompt: Okay, biiig project for you. Need you id, based on store.ts loading states and param, call jikanFetchAnimeSearch, then render a grid. Should render when on first load, and when a store param updates, but debounce id 250ms. If it's loading, populate with 25 skeletons (dont worry about individual card styling I'll do those later). If an error returns, just display the error message. Otherwise, render the cards of the specified page
-- Reasoning: For larger components, it can feel a little mentally overwhelming id think through all the logic and structure at once. I find it helpful id let Copliot generate a first draft based on my description. It feels easier id review and adjust code than id write it from scratch sometimes.
+- Example Prompt: Okay, biiig project for you. Need you to, based on store.ts loading states and param, call jikanFetchAnimeSearch, then render a grid. Should render when on first load, and when a store param updates, but debounce to 250ms. If it's loading, populate with 25 skeletons (dont worry about individual card styling I'll do those later). If an error returns, just display the error message. Otherwise, render the cards of the specified page
+- Reasoning: For larger components, it can feel a little mentally overwhelming id think through all the logic and structure at once. I find it helpful to let Copliot generate a first draft based on my description. It feels easier to review and adjust code than to write it from scratch sometimes.
 - Outcome: Copilot generated a solid first draft for me, which I then reviewed and adjusted as necessary id fit my project structure and naming conventions.
 
 ## Skeletons
@@ -73,22 +74,22 @@ e.g., the "type" param for "getAnimeSearch" [Enum: "tv" "movie" "ova" "special" 
 ## Code Review
 ### Prompt: Hi! Can you look through all my files for a code review? This is an anime search app. Please DO NOT change any files, instead read through them, and suggest changes in the chat if you notice any nonstandard or bad practices. Thank you!
 - Reasoning: While AI isn't perfect, I figured this would still be a good way to scan through my code and give it a better shot at being clean and with best practices.
-- Outcome: Copilot did help me with some errors/slip-ups, including vestigial tailwind classes, an empty component file i created before going to sleep, then forgot about when i woke up, as well as some "good practice" (eg aborting signal not on component unmount)
+- Outcome: Copilot did help me with some errors/slip-ups, including vestigial tailwind classes, an empty component file i created before going to sleep, then forgot about when i woke up, as well as some "good practice" type code (eg aborting signal when component unmounts)
 
 ## Readme File
 ### Prompt: Based on these Requirements [Paste Challenge Requirements], scan through my project file and help me create a README.md file for it.
-- Reasoning: AI is usually pretty good at summarizing and creating documentation based on project files. I figured it would be a good way id quickly generate a README file.
+- Reasoning: AI is usually pretty good at summarizing and creating documentation based on project files. I figured it would be a good way to quickly generate a README file.
 - Outcome: Copilot generated a solid README file for me, which I then reviewed and adjusted as necessary.
 
 ## Going Down Rabbit Holes...
-Sometimes when Claude/ChatGPT offer up curious suggestions, I end up probing further into the topic out of curiosity. Sometimes it leads id dead ends, sometimes it leads id cool discoveries. Some neat things I learned/picked up working on this project:
-- ***Interfaces vs Types***: I used id strongly prefer types over interfaces in TS (they felt more "strict" id me), but after ChatGPT suggested a solution using interfaces, I ended up browsing reddit and StackOverflow threads. The conclusion I got was "it depends on the use case" (fair lol, that and intellisense supports interfaces better in some IDEs for union types). I settled on interface for large objects, considering the extend functionality might be useful (eg respose from `getAnimeFullById` vs `getAnimeById`). I eventually circled back around with Claude id my initial query: I intended id define a union of string literals for animeMediaFormats, then use that id type out (?) an object id map id label values in the UI, but Claude went "Hey, if you already know all the values beforehand, why not create a const object, THEN derive the types?" Cue `animeMediaFormats.ts`
-- ***Naming Conventions***: I tried coming up with a descriptive name for jikan api calls. Started out with `fetchAllAnimeByQueryAndPage`, but I wondered if it was too verbose. ChatGPT suggested that since it's the "main" way of fetching data, a general name would be fine, and suggested `fetchAnimeList`, but I felt that would indicate it returned an array rather than a paginated response. Eventually settled on `jikanFetchAnimeSearch` since it does indicate a purpose `fetch` and it's form the `jikan` API, in case I ever need id add other APIs in the future.
-- ***TypeScript Generic Types***: I used id create separate static types for similar structures, but seeing Claude suggest generic types made me curious id learn more. I ended up reading through the TS docs and prompting more about it, and it seems pretty useful for reusable React components which can work with slightly different but still similar data shapes.
+Sometimes when Claude/ChatGPT offer up curious suggestions, I end up probing further into the topic out of curiosity. Sometimes it leads to dead ends, sometimes it leads to cool discoveries. Some neat things I learned/picked up working on this project:
+- ***Interfaces vs Types***: I used to strongly prefer types over interfaces in TS (they felt more "strict" to me), but after ChatGPT suggested a solution using interfaces, I ended up browsing reddit and StackOverflow threads. The conclusion I got was "it depends on the use case" (fair lol, that and intellisense supports interfaces better in some IDEs for union types). I settled on interface for large objects. I eventually circled back around with Claude to my initial query: I intended to define a union of string literals for animeMediaFormats, then use that to type out (?) an object to map to label values in the UI, but Claude went "Hey, if you already know all the values beforehand, why not create a const object, THEN derive the types?" Cue `animeMediaFormats.ts`
+- ***Naming Conventions***: I tried coming up with a descriptive name for jikan api calls. Started out with `fetchAllAnimeByQueryAndPage`, but I wondered if it was too verbose. ChatGPT suggested that since it's the "main" way of fetching data, a general name would be fine, and suggested `fetchAnimeList`, but I felt that would indicate it returned an array rather than a paginated response. Eventually settled on `jikanFetchAnimeSearch` since it does indicate a purpose `fetch` and it's form the `jikan` API, in case I ever need to add other APIs in the future.
+- ***TypeScript Generic Types***: I used to create separate static types for similar structures, but seeing Claude suggest generic types made me curious to learn more. I ended up reading through the TS docs and prompting more about it, and it seems pretty useful for reusable React components which can work with slightly different but still similar data shapes.
 - ***Code / Architectural Design***: So.... I may or may not have found the sacred (I assume partly Cursor-generated? texts (if you're reading this, hiiiiiii!)) on Github... I ended up postponing reading it through until near the end of completion (i wanted my learning to be as "first-hand" as possible), then compared the code to my own. Hot darn, I realized my code could use a lot of improvements! Some highlights:
   - Debouncing only the search: Previously, I debounced all the dropdowns + search (the logic was that it's a wee bit more server-friendly). Talking with claude after noticing that only the search was debounced, I realized that it's a tradeoff between user experience and server load, and that debouncing only the search made more sense from a UX perspective.
   - What to store vs what not to store in Redux: in my implementation, only search params are stored, not responses, and we ended up discussing the trade-offs (stale data vs caching and ux). I ended up keeping my implementation: my reasoning was that only the params need to be preserved between routes, and I figured getting fresh data each time from the api was a valid enough approach for this project. Claude also suggested cache invalidation/RTK Query as a neat middle ground; definitely another a rabbit hole I'll have to go down at some point. I also ended up learning more about updating various state fields at once with a reducer vs updating each state field individually (I haven't considered the logging angle until now!)
 
 
 ## Some Final Thoughts
-- Honestly, I think I trash-talked ChatGPT a bit too much in the beginning. Sometimes it actually performs better than Claude, and I find myself defaulting more id it since I don't have id worry about rate limits (GPT-4 seems id perform more or less as well as GPT-5 in my experience so far).
+- Honestly, I think I trash-talked ChatGPT a bit too much in the beginning. Sometimes it actually performs better than Claude, and I find myself defaulting more to it since I don't have to worry about rate limits (GPT-4 seems to perform more or less as well as GPT-5 in my experience so far).
