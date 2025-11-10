@@ -1,5 +1,5 @@
 import AnimeExtendedDetailsHeaderContainer from "@/components/AnimeDetailsPage/AnimeExtendedDetailsHeaderContainer.tsx";
-import {disableUrlEmbedAutoplay} from "@/utils/disableUrlEmbedAutoplay.ts";
+import {tryDisableUrlEmbedAutoplay} from "@/utils/tryDisableUrlEmbedAutoplay.ts";
 import type {JikanAnimeMalUrlResourceInterface} from "@/services/jikanApi/api/jikanApiResponseTypes.ts";
 import {ExternalLinkIcon} from "lucide-react";
 
@@ -48,7 +48,7 @@ export function AnimeExtendedDetails({
                 <AnimeExtendedDetailsHeaderContainer headerText={"Trailer"}>
                     <div className={`w-full aspect-video`}>
                         <iframe
-                            src={disableUrlEmbedAutoplay(trailerEmbedUrl)}
+                            src={tryDisableUrlEmbedAutoplay(trailerEmbedUrl)}
                             title="Anime Trailer"
                             className={`w-full h-full rounded-lg`}
                             allowFullScreen

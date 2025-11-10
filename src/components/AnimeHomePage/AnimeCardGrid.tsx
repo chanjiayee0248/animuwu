@@ -24,6 +24,12 @@ function AnimeCardGrid({animeData, animeSearchIsLoading, animeSearchError}: Anim
         );
     }
 
+    // Deduplicate results by mal_id to avoid duplicate React keys (can happen with rapid pagination or
+    // transient API responses that include overlapping items). Preserve first occurrence order.
+    const uniqueAnimeData = animeData?.data
+        ? animeData.data.filter((item, index, arr) => arr.findIndex(i => String(i.mal_id) === String(item.mal_id)) === index)
+        : [];
+
     // Otherwise render the grid wrapper with loading skeletons, error, or results
     return (
         <div
@@ -37,11 +43,11 @@ function AnimeCardGrid({animeData, animeSearchIsLoading, animeSearchError}: Anim
             ) : animeSearchError ? (
                 // Error message spans full width
                 <KaomojiErrorDisplay messageHeader={"Error!"} messageContent={animeSearchError}/>
-            ) : animeData && animeData.data.length > 0 ? (
-                // Data cards
-                animeData.data.map((anime) => (
+            ) : uniqueAnimeData && uniqueAnimeData.length > 0 ? (
+                // Data cards (deduplicated)
+                uniqueAnimeData.map((anime) => (
                     <AnimeCard
-                        key={anime.mal_id}
+                        key={String(anime.mal_id)}
                         title={getPreferredJikanAnimeTitle(anime.titles)}
                         imageUrl={anime.images.jpg.large_image_url || anime.images.jpg.image_url}
                         score={anime.score}

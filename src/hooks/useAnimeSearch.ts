@@ -160,6 +160,12 @@ export function useAnimeSearch():UseAnimeSearchReturn  {
         return () => {
             if (debounceTimeoutRef.current) {
                 clearTimeout(debounceTimeoutRef.current);
+                debounceTimeoutRef.current = null;
+            }
+            // Abort any in-flight request: Client-side cleanup so unmounted components don't receive responses
+            if (activeAbortControllerRef.current) {
+                activeAbortControllerRef.current.abort();
+                activeAbortControllerRef.current = null;
             }
         };
     }, [searchQuery, airingStatus, audienceRating, mediaFormat, sortCategory, sortDirection, currentPage, dispatch]);

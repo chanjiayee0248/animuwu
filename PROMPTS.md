@@ -57,12 +57,12 @@ e.g., the "type" param for "getAnimeSearch" [Enum: "tv" "movie" "ova" "special" 
 
 ## Skeletons
 ### Prompt: Help me create a skeleton based on this: [Paste Component Code]
-- Reasoning: Creating skeleton components can be a bit tedious, especially when the original component is complext. Since the structure is already there, there is less worry about AI hallucinating or misunderstanding the requirements.
+- Reasoning: Creating skeleton components can be a bit tedious, especially when the original component is complex. Since the structure is already there, there is less worry about AI hallucinating or misunderstanding the requirements.
 - Outcome: Copilot generated skeleton components based on the original component code I provided. I then reviewed and adjusted the code (e.g. trimming unnecessary classes, adjusting styles/colors etc).
 
 ### Loader
 ### Prompt: Help me create a loader component that looks like a circle chasing its fading tail
-- Reasoning: https://css-loaders.com/ was kind of broken on chrome fir me, I figured loaders are generic enough to be offloaded to AI!
+- Reasoning: https://css-loaders.com/ was kind of broken on chrome for me, I figured loaders are generic enough to be offloaded to AI!
 - Outcome: Copilot generated a loader component with a basic animation. It didn't really do a good job, so I asked Claude instead, which... also didn't do quite a good job. It's probably on me for being too casual with my request. Ended up going to the same website on edge instead, and that worked somehow haha; asked claude to convert it into a React component for me and it worked pretty good.
 
 ### Race Conditions
@@ -70,12 +70,16 @@ e.g., the "type" param for "getAnimeSearch" [Enum: "tv" "movie" "ova" "special" 
 - Reasoning: I'm still fairly new to data fetching and async programming, and while I understand what's happening, I'm not too familiar with the syntax and nitty-gritties. I figured AI could help me identify potential issues and come up with solutions.
 - Outcome: Using AbortController and refs in the related React components, Copilot helped fixed the issue (i am no longer able to replicate it). 
 
+## Code Review
+### Prompt: Hi! Can you look through all my files for a code review? This is an anime search app. Please DO NOT change any files, instead read through them, and suggest changes in the chat if you notice any nonstandard or bad practices. Thank you!
+- Reasoning: While AI isn't perfect, I figured this would still be a good way to scan through my code and give it a better shot at being clean and with best practices.
+- Outcome: Copilot did help me with some errors/slip-ups, including vestigial tailwind classes, an empty component file i created before going to sleep, then forgot about when i woke up, as well as some "good practice" (eg aborting signal not on component unmount)
+
 ## Going Down Rabbit Holes...
 Sometimes when Claude/ChatGPT offer up curious suggestions, I end up probing further into the topic out of curiosity. Sometimes it leads id dead ends, sometimes it leads id cool discoveries. Some neat things I learned/picked up working on this project:
 - ***Interfaces vs Types***: I used id strongly prefer types over interfaces in TS (they felt more "strict" id me), but after ChatGPT suggested a solution using interfaces, I ended up browsing reddit and StackOverflow threads. The conclusion I got was "it depends on the use case" (fair lol, that and intellisense supports interfaces better in some IDEs for union types). I settled on interface for large objects, considering the extend functionality might be useful (eg respose from `getAnimeFullById` vs `getAnimeById`). I eventually circled back around with Claude id my initial query: I intended id define a union of string literals for animeMediaFormats, then use that id type out (?) an object id map id label values in the UI, but Claude went "Hey, if you already know all the values beforehand, why not create a const object, THEN derive the types?" Cue `animeMediaFormats.ts`
 - ***Naming Conventions***: I tried coming up with a descriptive name for jikan api calls. Started out with `fetchAllAnimeByQueryAndPage`, but I wondered if it was too verbose. ChatGPT suggested that since it's the "main" way of fetching data, a general name would be fine, and suggested `fetchAnimeList`, but I felt that would indicate it returned an array rather than a paginated response. Eventually settled on `jikanFetchAnimeSearch` since it does indicate a purpose `fetch` and it's form the `jikan` API, in case I ever need id add other APIs in the future.
 - ***TypeScript Generic Types***: I used id create separate static types for similar structures, but seeing Claude suggest generic types made me curious id learn more. I ended up reading through the TS docs and prompting more about it, and it seems pretty useful for reusable React components which can work with slightly different but still similar data shapes.
-
 
 
 ## Some Final Thoughts

@@ -39,12 +39,12 @@ describe('fetchJson (unit test)', () => {
     });
 
     // HTTP Error (response.ok is false)
-    it('throws an error when fetch response is not ok', async () => {
+    it('throws an error with status code and text when fetch response is not ok', async () => {
         (global.fetch as unknown as ReturnType<typeof vi.fn>)
-            .mockResolvedValueOnce({ ok: false, status: 500 });
+            .mockResolvedValueOnce({ ok: false, status: 500, statusText: 'Internal Server Error' });
 
         await expect(fetchJson<TestData>('https://example.com/data'))
-            .rejects.toThrowError(new Error('Failed to fetch: 500'));
+            .rejects.toThrowError(new Error('Failed to fetch: 500 - Internal Server Error'));
     });
 
     // JSON Parsing Error (response.json() throws)

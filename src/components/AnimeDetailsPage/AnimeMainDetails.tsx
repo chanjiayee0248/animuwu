@@ -72,10 +72,13 @@ function AnimeMainDetails({
                         {`< Home`}
                     </button>
                 </Link>
-                <div className={`w-full px-[2%] flex gap-12 items-end max-md:flex-col max-md:items-center max-md:gap-6`}>
+                <div
+                    className={`w-full px-[2%] flex gap-12 items-end max-md:flex-col max-md:items-center max-md:gap-6`}>
                     <img className={`object-cover aspect-9/14 rounded-md w-[240px]
                     max-md:w-[200px] max-sm:w-[160px] max-md:rounded-sm
-                    `} src={imageUrl || placeholderImage}/>
+                    `} src={imageUrl || placeholderImage}
+                         alt={englishTitle}
+                    />
                     <div className={`w-full flex flex-col gap-4 max-md:gap-2`}>
                         <div className={`flex gap-4 max-md:gap-2`}>
                             <p className={`${tagStyle} bg-accent-base-standard text-accent-base-dark`}>{mediaType}</p>
@@ -87,9 +90,10 @@ function AnimeMainDetails({
                             <h2 className={`text-2xl font-semibold italic text-primary-base-bright
                             max-md:text-xl max-sm:text-lg`}>{defaultTitle}</h2>
                             <h3 className={`text-xl italic text-secondary-muted-standard
-                            max-md:text-lg max-sm:text-`}>{japaneseTitle}</h3>
+                            max-md:text-lg max-sm:text-md`}>{japaneseTitle}</h3>
                         </div>
-                        <div className={`flex flex-wrap gap-2 text-md max-md:text-sm max-sm:text-xs text-primary-muted-bright items-center`}>
+                        <div
+                            className={`flex flex-wrap gap-2 text-md max-md:text-sm max-sm:text-xs text-primary-muted-bright items-center`}>
                             <div className={`flex gap-2 items-center`}>
                                 <ClockIcon className={`w-4 h-4 text-accent-muted-standard max-md:`}/>
                                 <p>{season} {year} {!hasDisplayTime && "N/A"}</p>

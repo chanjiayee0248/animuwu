@@ -6,12 +6,14 @@ function NotFoundPage() {
             <p aria-hidden={true} className={`text-8xl text-accent-muted-standard`}>⋅˚.⋆☾⁺₊ ‧</p>
             <h1 className={`text-4xl font-[Nunito] font-bold`}>404 - Page Not Found</h1>
             <p className={`text-xl`}>Somewhere out there, this page is living its best isekai life.</p>
-            <Link to={'/'} className={`text-2xl`}>
-                <button className={`px-4 py-2 rounded-3xl text-xl bg-secondary-muted-dark text-secondary-muted-bright 
-                hover:brightness-150 active:brightness-90`}>
-                    Return Home?
-                </button>
+            <Link
+                to="/"
+                className="inline-block px-4 py-2 rounded-3xl text-xl bg-secondary-muted-dark text-secondary-muted-bright
+               hover:brightness-150 active:brightness-90"
+            >
+                Return Home?
             </Link>
+
         </div>
     );
 }
